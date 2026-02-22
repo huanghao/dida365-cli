@@ -90,7 +90,7 @@ DONE
   - 防抖状态持久化到 `~/.config/dida365-cli/debounce.json`
   - 写入成功后记录签名，窗口内重复请求直接拦截，避免 agent 误重复写
   - 新增测试：`internal/cli/write_debounce_test.go`
-- commit：待本次提交后回填
+- commit：`e0c4f09`
 
 ### 整理展示的字段和API的对应关系
 - 是否存在重要的字段没有被展示出来

@@ -213,3 +213,12 @@
   - 新增测试：`internal/cli/write_debounce_test.go`。
 - 下一次计划：
   - 进入 `T-008`：整理并实现面向 agent 的功能/限制/统计能力。
+
+### 记录 #20 / blocked-design
+- 本次进展结果：
+  - 进入 `T-008`，识别为跨命令契约设计项。
+  - 创建设计闸门：`docs/process/design-gates/DG-0002-agent-adaptation-scope.md`。
+  - 已将 `T-008` 标记为 `BLOCKED_DESIGN`。
+- 下一次计划：
+  - 等待你确认 `Decision: A|B|C` 后恢复 `T-008`。
+  - 并行推进 `T-009`（license 选型）。
