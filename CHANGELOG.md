@@ -121,3 +121,23 @@
 - 下一次计划：
   - 继续补命令级测试（`list/show` 输出与参数行为）。
   - 基于真实 API 响应进一步校准状态字段语义。
+
+### 记录 #10 / in-progress
+- 本次进展结果：
+  - 完成代码/文档一致性检查（命令帮助与现有文档对齐）。
+  - 新增 agent 高频手册：`docs/guides/agent-cli-quick-manual.md`。
+  - 新增手册维护规则：`docs/guides/agent-manual-rules.md`。
+  - README 增加 agent 文档入口。
+- 下一次计划：
+  - 按规则继续补命令行为测试。
+  - 若命令行为再变化，优先更新 agent 手册再更新 README/man。
+
+### 记录 #11 / in-progress
+- 本次进展结果：
+  - 补齐命令 `--json` 覆盖：`done`、`delete`、`version`、`auth` 各子命令（init/login/token/status/refresh/logout）。
+  - 写操作在 `--dry-run --json` 下返回结构化预检输出。
+  - `auth status --json` 返回统一状态对象，便于 agent 读取。
+  - 同步更新 README、man 文档与 agent 快速手册。
+- 下一次计划：
+  - 回填 TODO 任务 commit hash。
+  - 继续推进“展示字段枚举值而不是裸数字”。

@@ -23,3 +23,59 @@ DONE
   - 文档覆盖全局参数、auth 子命令、任务命令、示例与配置路径
   - 已体现当前实装状态：`auth init/login/token/status` 可直接使用（你已实操验证）
 - commit：`c7e230c`
+
+### 所有命令都实现--json参数，输出的结果给agent读
+
+DONE
+- 完成时间：2026-02-23 01:19:33 +0800
+- 完成内容：
+  - 补齐 `done`、`delete`、`version` 的 `--json` 输出
+  - 补齐 `auth` 子命令 `init/login/token/status/refresh/logout` 的 `--json` 输出
+  - `--dry-run` 在 JSON 模式下返回结构化预检对象
+  - 同步更新 `README.md`、`doc/man/dida.1.md`、`docs/guides/agent-cli-quick-manual.md`
+- commit：待本次提交后回填
+
+
+### 展示字段的枚举值，而不是裸数字
+比如下面的status、priority
+```
+❯ go run ./cmd/dida show --project 699b3180e4b03ce3a5fa07cf --id 699b328de4b03ce3a5fa13cf
+Field          Value
+-------------  ------------------------
+ID             699b328de4b03ce3a5fa13cf
+Project        699b3180e4b03ce3a5fa07cf
+Title          some-task
+Status         0
+Completed      no
+CompletedTime
+Start
+Due
+Priority       0
+Content        这是内容
+Description
+```
+
+### 实现token refresh
+- API文档上说grant_type目前只支持授权，但OAuth标准是支持fresh的。也许只需要验证一下当前的实现是否已经有效了。
+- 如果无效，还要设计一下怎么才能实现。
+- 检查一下目前每次获得的access token的默认过期时间有多长？（记录到文档里： `docs/guides/dida-auth-token-flow.md`）
+
+### 实现缓存，减少抖动
+- 比如短时间调用多次查看命令，不需要都调用API
+- 实现短时间缓存，先做设计，缓存到哪里，存多长时间
+- 为了避免agent操作错误，比如短期快速调用多次创建，你要怎么设计一下防抖
+
+### 整理展示的字段和API的对应关系
+- 是否存在重要的字段没有被展示出来
+- 是否存在代码里无用的字段
+
+### 限制创建task时输入的内容长度（<500字）
+- 限制创建时输入的长度，但不限制展示的长度。因为我还可以通过其他App在界面去修改，而不仅仅是这个工具
+
+### 考虑其他适配agent的功能、限制、统计等功能
+
+### 项目增加license信息
+
+### 打包和发布
+
+### 面向agent来阅读这个项目，会需要考虑增加什么文件和导引？

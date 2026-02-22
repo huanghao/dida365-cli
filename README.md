@@ -56,17 +56,23 @@ go run ./cmd/dida auth status
 - `dida show --project <project_id> --id <task_id>`
 - `dida add --project <project_id> --title "..."`
 - `dida update --project <project_id> --id <task_id> [flags]`
-- `dida done --project <project_id> --id <task_id>`
-- `dida delete --project <project_id> --id <task_id>`
-- `dida version`
+- `dida done --project <project_id> --id <task_id> [--json]`
+- `dida delete --project <project_id> --id <task_id> [--json]`
+- `dida version [--json]`
 
 Use `--dry-run` to preview requests without executing.
+For agent workflows, prefer `--json` on all actionable commands.
 
 `dida list` table output includes frequently-used fields by default:
 - completion state
 - due date
 - priority
 - content (truncated preview)
+
+## Agent Docs
+
+- Quick manual: `docs/guides/agent-cli-quick-manual.md`
+- Maintenance rules: `docs/guides/agent-manual-rules.md`
 
 ## Config
 

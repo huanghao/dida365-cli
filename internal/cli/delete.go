@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/huanghao/dida365-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 
 func NewDeleteCommand(app *App) *cobra.Command {
 	var projectID string
 	var taskID string
+	var asJSON bool
 
 	cmd := &cobra.Command{
 		Use:   "delete",
@@ -23,12 +25,30 @@ func NewDeleteCommand(app *App) *cobra.Command {
 				return err
 			}
 			if app.DryRun {
+				if asJSON {
+					return output.PrintJSON(app.Out, map[string]any{
+						"action":  "delete_task",
+						"dry_run": true,
+						"method":  "DELETE",
+						"url":     fmt.Sprintf("%s/project/%s/task/%s", cfg.APIBaseURL, projectID, taskID),
+						"project": projectID,
+						"task_id": taskID,
+					})
+				}
 				fmt.Fprintf(app.Out, "Would call DELETE %s/project/%s/task/%s\n", cfg.APIBaseURL, projectID, taskID)
 				return nil
 			}
 			client := newAPIClient(cfg)
 			if err := client.DeleteTask(projectID, taskID); err != nil {
 				return err
+			}
+			if asJSON {
+				return output.PrintJSON(app.Out, map[string]any{
+					"ok":      true,
+					"action":  "delete_task",
+					"project": projectID,
+					"task_id": taskID,
+				})
 			}
 			fmt.Fprintf(app.Out, "Deleted task: %s\n", taskID)
 			return nil
@@ -37,5 +57,6 @@ func NewDeleteCommand(app *App) *cobra.Command {
 
 	cmd.Flags().StringVar(&projectID, "project", "", "Project ID")
 	cmd.Flags().StringVar(&taskID, "id", "", "Task ID")
+	cmd.Flags().BoolVar(&asJSON, "json", false, "Output JSON")
 	return cmd
 }

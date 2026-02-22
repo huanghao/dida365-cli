@@ -47,6 +47,9 @@ Required flags:
 - `--client-secret`
 - `--redirect-uri`
 
+Optional flags:
+- `--json`
+
 ### `dida auth login`
 
 Print authorization URL (user opens it in browser to authorize).
@@ -54,6 +57,7 @@ Print authorization URL (user opens it in browser to authorize).
 Optional flags:
 - `--scope` (default: `tasks:read tasks:write`)
 - `--state` (default: auto-generated)
+- `--json`
 
 ### `dida auth token`
 
@@ -64,6 +68,7 @@ Required flags:
 
 Optional flags:
 - `--scope`
+- `--json`
 
 ### `dida auth status`
 
@@ -74,6 +79,9 @@ Show current config/token status:
 - access token presence
 - token expiry/scope (if available)
 
+Optional flags:
+- `--json`
+
 ### `dida auth refresh`
 
 Try refreshing access token with refresh token.
@@ -81,6 +89,7 @@ Try refreshing access token with refresh token.
 Optional flags:
 - `--refresh-token` (default: read from config)
 - `--scope`
+- `--json`
 
 Note:
 - If server response does not include a refresh token, this command may be unavailable in practice.
@@ -89,6 +98,9 @@ Note:
 ### `dida auth logout`
 
 Clear stored token in config.
+
+Optional flags:
+- `--json`
 
 ## `dida projects list`
 
@@ -135,6 +147,9 @@ Required flags:
 - `--id`
 
 Optional flags:
+- `--json`
+
+Optional flags:
 - `--format table|json`
 - `--json`
 
@@ -164,6 +179,9 @@ Update task.
 Required flags:
 - `--project`
 - `--id`
+
+Optional flags:
+- `--json`
 
 Optional flags:
 - `--title`
@@ -196,6 +214,9 @@ Required flags:
 ## `dida version`
 
 Print CLI version.
+
+Optional flags:
+- `--json`
 
 ## EXAMPLES
 
