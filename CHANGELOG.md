@@ -132,7 +132,7 @@
   - 按规则继续补命令行为测试。
   - 若命令行为再变化，优先更新 agent 手册再更新 README/man。
 
-### 记录 #11 / in-progress
+### 记录 #11 / commit `65e8048`
 - 本次进展结果：
   - 补齐命令 `--json` 覆盖：`done`、`delete`、`version`、`auth` 各子命令（init/login/token/status/refresh/logout）。
   - 写操作在 `--dry-run --json` 下返回结构化预检输出。

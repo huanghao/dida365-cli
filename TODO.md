@@ -33,7 +33,7 @@ DONE
   - 补齐 `auth` 子命令 `init/login/token/status/refresh/logout` 的 `--json` 输出
   - `--dry-run` 在 JSON 模式下返回结构化预检对象
   - 同步更新 `README.md`、`doc/man/dida.1.md`、`docs/guides/agent-cli-quick-manual.md`
-- commit：待本次提交后回填
+- commit：`65e8048`
 
 
 ### 展示字段的枚举值，而不是裸数字
