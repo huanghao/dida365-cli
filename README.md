@@ -66,6 +66,7 @@ Use `--dry-run` to preview requests without executing.
 Default config path:
 
 - `~/.config/dida365-cli/config.json`
+- This project uses a fixed HOME-based default path on all platforms (does not use OS-specific `UserConfigDir`).
 
 Override config path:
 

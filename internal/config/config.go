@@ -156,11 +156,11 @@ func resolvePath(pathOverride string) (string, error) {
 	if v := strings.TrimSpace(os.Getenv("DIDA_CONFIG")); v != "" {
 		return expandHome(v), nil
 	}
-	configDir, err := os.UserConfigDir()
+	home, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(configDir, defaultConfigDirName, defaultConfigFileName), nil
+	return filepath.Join(home, ".config", defaultConfigDirName, defaultConfigFileName), nil
 }
 
 func expandHome(path string) string {

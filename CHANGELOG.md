@@ -54,3 +54,26 @@
   - 增加 `internal/cli` 命令行为测试（参数必填校验、dry-run 输出断言）。
   - 评估并实现自动 refresh 策略（401 自动尝试刷新并重试一次）。
   - 补充认证排障文档（code 获取、redirect URI 不匹配、scope/授权失败案例）。
+
+### 记录 #5 / in-progress
+- 本次进展结果：
+  - 新增认证实操文档：`docs/guides/dida-auth-token-flow.md`。
+  - 文档包含完整“拿 token”流程：
+    - 浏览器获取 `code`
+    - `curl` 兑换 `access_token`
+    - `curl` 验证 API 调用
+    - `refresh_token` 刷新
+    - 对应 `dida auth` 命令流程
+  - 增加可直接复制的命令模板和常见排错项。
+- 下一次计划：
+  - 把该文档在 `README.md` 增加入口链接。
+  - 继续补 `internal/cli` 命令行为测试（必填参数与 dry-run 输出）。
+
+### 记录 #6 / in-progress
+- 本次进展结果：
+  - 默认配置路径策略改为固定 HOME 规则：`$HOME/.config/dida365-cli/config.json`。
+  - 代码不再使用 `os.UserConfigDir()` 推导默认路径。
+  - 同步更新文档说明（README 与认证实操文档）。
+- 下一次计划：
+  - 补充命令行为测试（含默认配置路径断言）。
+  - 继续推进自动化 login（本地回调监听）设计。
