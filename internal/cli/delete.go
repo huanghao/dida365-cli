@@ -38,10 +38,15 @@ func NewDeleteCommand(app *App) *cobra.Command {
 				fmt.Fprintf(app.Out, "Would call DELETE %s/project/%s/task/%s\n", cfg.APIBaseURL, projectID, taskID)
 				return nil
 			}
+			signature := map[string]string{"project": projectID, "task_id": taskID}
+			if err := checkWriteDebounce(app, "delete_task", signature); err != nil {
+				return err
+			}
 			client := newAPIClient(cfg)
 			if err := client.DeleteTask(projectID, taskID); err != nil {
 				return err
 			}
+			markWriteDebounce(app, "delete_task", signature)
 			if asJSON {
 				return output.PrintJSON(app.Out, map[string]any{
 					"ok":      true,

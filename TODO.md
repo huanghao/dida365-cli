@@ -75,12 +75,22 @@ DONE
   - CLI 增加明确降级提示：`auth refresh` 失败时引导重新授权（`auth login` + `auth token --code ...`）
   - 文档补充验证结论与观测时长（`expires_in=15551999`，约 180 天）
   - 更新文档：`docs/guides/dida-auth-token-flow.md`、`docs/research/dida-api-overview.md`
-- commit：待本次提交后回填
+- commit：`5dbbc31`
 
 ### 实现缓存，减少抖动
 - 比如短时间调用多次查看命令，不需要都调用API
 - 实现短时间缓存，先做设计，缓存到哪里，存多长时间
 - 为了避免agent操作错误，比如短期快速调用多次创建，你要怎么设计一下防抖
+
+DONE
+- 完成时间：2026-02-23 01:48:55 +0800
+- 完成内容：
+  - 按 `DG-0001 Decision: A` 落地：不做读缓存，只实现写操作防抖
+  - 为 `add/update/done/delete/projects create` 增加 3 秒短窗口防抖
+  - 防抖状态持久化到 `~/.config/dida365-cli/debounce.json`
+  - 写入成功后记录签名，窗口内重复请求直接拦截，避免 agent 误重复写
+  - 新增测试：`internal/cli/write_debounce_test.go`
+- commit：待本次提交后回填
 
 ### 整理展示的字段和API的对应关系
 - 是否存在重要的字段没有被展示出来
@@ -92,7 +102,7 @@ DONE
   - 新增字段映射文档：`docs/research/dida-task-field-mapping.md`（API 字段 -> list/show/json 对照）
   - `show` 表格补充高价值字段：`AllDay`、`TimeZone`、`Repeat`
   - 结论：高频字段已覆盖；当前无应直接删除的“无用字段”，未展示字段保留给后续能力
-- commit：待本次提交后回填
+- commit：`07d1bf8`
 
 ### 限制创建task时输入的内容长度（<500字）
 - 限制创建时输入的长度，但不限制展示的长度。因为我还可以通过其他App在界面去修改，而不仅仅是这个工具
@@ -104,7 +114,7 @@ DONE
   - 长度按字符数（rune）计算，支持中文
   - 新增测试：`internal/cli/task_input_test.go`（499/500 边界）
   - 更新文档：`README.md`、`doc/man/dida.1.md`、`docs/guides/agent-cli-quick-manual.md`
-- commit：待本次提交后回填
+- commit：`c0ff3c7`
 
 ### 考虑其他适配agent的功能、限制、统计等功能
 

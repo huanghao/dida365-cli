@@ -73,6 +73,10 @@ Create input limit:
 - `dida add` enforces text length `< 500` characters for `--title`, `--content`, `--desc`.
 - This only limits CLI create input; existing longer task content can still be displayed.
 
+Write debounce:
+- write commands (`add/update/done/delete/projects create`) are debounced for 3 seconds.
+- repeated identical write requests in the short window will be blocked to reduce accidental duplicate operations.
+
 ## Agent Docs
 
 - Quick manual: `docs/guides/agent-cli-quick-manual.md`
@@ -90,6 +94,7 @@ Create input limit:
 Default config path:
 
 - `~/.config/dida365-cli/config.json`
+- `~/.config/dida365-cli/debounce.json` (write debounce state)
 - This project uses a fixed HOME-based default path on all platforms (does not use OS-specific `UserConfigDir`).
 
 Override config path:

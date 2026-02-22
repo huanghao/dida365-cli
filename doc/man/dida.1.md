@@ -17,6 +17,7 @@ Current implementation provides:
 - project list/create
 - task list/show/add/update/done/delete
 - token refresh command (best-effort; depends on server response capabilities)
+- write-command debounce (3-second window for duplicate write requests)
 
 ## GLOBAL OPTIONS
 

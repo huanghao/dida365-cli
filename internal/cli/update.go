@@ -40,12 +40,17 @@ func NewUpdateCommand(app *App) *cobra.Command {
 				fmt.Fprintf(app.Out, "Would call POST %s/task/%s\n", cfg.APIBaseURL, taskID)
 				return output.PrintJSON(app.Out, input)
 			}
+			signature := map[string]any{"id": taskID, "input": input}
+			if err := checkWriteDebounce(app, "update_task", signature); err != nil {
+				return err
+			}
 
 			client := newAPIClient(cfg)
 			task, err := client.UpdateTask(taskID, input)
 			if err != nil {
 				return err
 			}
+			markWriteDebounce(app, "update_task", signature)
 			if asJSON {
 				return output.PrintJSON(app.Out, task)
 			}

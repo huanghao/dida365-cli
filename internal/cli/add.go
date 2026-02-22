@@ -41,12 +41,16 @@ func NewAddCommand(app *App) *cobra.Command {
 				fmt.Fprintf(app.Out, "Would call POST %s/task\n", cfg.APIBaseURL)
 				return output.PrintJSON(app.Out, input)
 			}
+			if err := checkWriteDebounce(app, "add_task", input); err != nil {
+				return err
+			}
 
 			client := newAPIClient(cfg)
 			task, err := client.CreateTask(input)
 			if err != nil {
 				return err
 			}
+			markWriteDebounce(app, "add_task", input)
 			if asJSON {
 				return output.PrintJSON(app.Out, task)
 			}

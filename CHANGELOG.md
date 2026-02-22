@@ -204,3 +204,12 @@
   - 更新文档：`README.md`、`doc/man/dida.1.md`、`docs/guides/agent-cli-quick-manual.md`。
 - 下一次计划：
   - 进入 `T-008`：整理并实现面向 agent 的功能/限制/统计能力。
+
+### 记录 #19 / in-progress
+- 本次进展结果：
+  - 发现 `DG-0001` 已确认 `Decision: A`，恢复执行 `T-005`。
+  - 完成写操作防抖：`add/update/done/delete/projects create` 统一 3 秒窗口拦截。
+  - 防抖状态落盘到 `~/.config/dida365-cli/debounce.json`，成功写入后记录签名。
+  - 新增测试：`internal/cli/write_debounce_test.go`。
+- 下一次计划：
+  - 进入 `T-008`：整理并实现面向 agent 的功能/限制/统计能力。

@@ -36,3 +36,6 @@
 
 ## Decision (你只填这一行)
 Decision: A
+
+## Implementation Status
+- 2026-02-23: 已按 A 落地（仅写操作防抖，不做读缓存）。

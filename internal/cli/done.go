@@ -38,10 +38,15 @@ func NewDoneCommand(app *App) *cobra.Command {
 				fmt.Fprintf(app.Out, "Would call POST %s/project/%s/task/%s/complete\n", cfg.APIBaseURL, projectID, taskID)
 				return nil
 			}
+			signature := map[string]string{"project": projectID, "task_id": taskID}
+			if err := checkWriteDebounce(app, "done_task", signature); err != nil {
+				return err
+			}
 			client := newAPIClient(cfg)
 			if err := client.CompleteTask(projectID, taskID); err != nil {
 				return err
 			}
+			markWriteDebounce(app, "done_task", signature)
 			if asJSON {
 				return output.PrintJSON(app.Out, map[string]any{
 					"ok":      true,

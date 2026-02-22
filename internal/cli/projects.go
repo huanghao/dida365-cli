@@ -90,11 +90,15 @@ func newProjectsCreateCommand(app *App) *cobra.Command {
 				fmt.Fprintf(app.Out, "Would call POST %s/project\n", cfg.APIBaseURL)
 				return output.PrintJSON(app.Out, input)
 			}
+			if err := checkWriteDebounce(app, "create_project", input); err != nil {
+				return err
+			}
 			client := newAPIClient(cfg)
 			project, err := client.CreateProject(input)
 			if err != nil {
 				return err
 			}
+			markWriteDebounce(app, "create_project", input)
 			if asJSON {
 				return output.PrintJSON(app.Out, project)
 			}
