@@ -186,3 +186,12 @@
   - 更新看板与交接状态为 `BLOCKED_DESIGN`。
 - 下一次计划：
   - 等待你确认 `Decision: A|B|C` 后继续实现。
+
+### 记录 #17 / in-progress
+- 本次进展结果：
+  - 完成 `T-006`：整理任务展示字段与 API 字段对应关系。
+  - 新增文档：`docs/research/dida-task-field-mapping.md`（覆盖 list/show/json 对照与字段评估）。
+  - `dida show` 补充字段展示：`AllDay`、`TimeZone`、`Repeat`。
+  - 明确结论：当前未发现可直接删除的无用 Task 字段。
+- 下一次计划：
+  - 进入 `T-007`：限制创建/更新 task 输入内容长度（<500 字符）。
