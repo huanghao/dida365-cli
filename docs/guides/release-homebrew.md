@@ -1,84 +1,186 @@
-# Homebrew 发布最小流程
+# Homebrew 打包与发布指南
 
 更新时间：2026-02-23
 
-目标：回答“命令行是不是用 Homebrew 发布最好，以及需要准备什么”。
-
-结论（当前项目）：
+结论：
 - 对 macOS 用户，Homebrew 是最合适的一线分发方式。
-- 建议采用“GitHub Release + Homebrew Tap”模式。
+- 推荐模式：`dida365-cli`（源码+二进制发布） + `homebrew-tap`（formula 仓库）。
 
-## 1. 你需要先准备的内容
+## 1. 先回答你的问题
 
-1. GitHub 仓库
-- 源码仓库：`dida365-cli`
-- 一个 tap 仓库（建议）：`homebrew-tap`
+Q1：`homebrew-tap` 是单独仓库吗？像多个包的索引目录？  
+A：是。它通常是单独仓库，里面放 `Formula/*.rb`，可以放多个工具的 formula，相当于你自己的包索引。
 
-2. 可复现构建产物
-- 至少提供：
-  - `dida_darwin_arm64.tar.gz`
-  - `dida_darwin_amd64.tar.gz`
-  - （可选）`dida_linux_amd64.tar.gz`
-- 每个压缩包里只放可执行文件 `dida`
+Q2：二进制放哪里？是放 tap 仓库还是 dida 仓库？  
+A：标准做法是二进制放在 `dida365-cli` 的 GitHub Release 附件里；tap 仓库只放 formula（URL+sha256），不存二进制。
 
-3. 版本规范
-- 使用 git tag（例如 `v0.1.0`）
-- 每次 release 固定对应一个 tag
+Q3：tag 打在 `dida365-cli`，tap 怎么知道版本？  
+A：tap 里的 formula 手动或自动更新 `url` 和 `sha256`。`url` 里会包含版本 tag（如 `v0.1.0`），所以 tap 通过 formula 指向具体版本。
 
-4. 校验值
-- 每个产物要有 SHA256（供 brew formula 校验）
+Q4：CI 是什么？要自己做还是有现成工具？  
+A：CI 是持续集成流水线（通常用 GitHub Actions）。你可以自己写 shell，也可以用现成工具 `goreleaser`。推荐 `goreleaser`，它可以自动：
+- cross build
+- 打包压缩
+- 生成/上传 GitHub Release
+- 更新 Homebrew tap formula
 
-## 2. 发布步骤（最小可执行）
+## 2. 发布架构（你会操作的两个仓库）
 
-1. 本地打 tag 并推送
+1. `dida365-cli`
+- 放源码
+- 打 tag
+- 产出 release 二进制
+
+2. `homebrew-tap`
+- 放 formula，例如 `Formula/dida.rb`
+- 用户通过 `brew tap <owner>/homebrew-tap && brew install dida` 安装
+
+## 3. 手工发布流程（先跑通一次）
+
+按顺序执行：
+
+1. 准备版本号  
+- 例如 `v0.1.0`
+- 确认本地测试通过：`go test ./...`
+
+2. 打 tag 并推送
 ```bash
 git tag v0.1.0
 git push origin v0.1.0
 ```
 
-2. 生成多平台二进制并上传到 GitHub Release
-- 方式 A：手工 `go build` 后上传
-- 方式 B：用 CI 自动构建上传（推荐）
-
-3. 在 tap 仓库新增 formula（`Formula/dida.rb`）
-- 指向 release 的 tar.gz URL
-- 填写 SHA256
-
-4. 用户安装
+3. 本地构建二进制并打包
 ```bash
-brew tap <your-org>/tap
+mkdir -p dist
+mkdir -p dist/darwin_arm64 dist/darwin_amd64
+GOOS=darwin GOARCH=arm64 go build -o dist/darwin_arm64/dida ./cmd/dida
+GOOS=darwin GOARCH=amd64 go build -o dist/darwin_amd64/dida ./cmd/dida
+
+tar -C dist/darwin_arm64 -czf dist/dida_darwin_arm64.tar.gz dida
+tar -C dist/darwin_amd64 -czf dist/dida_darwin_amd64.tar.gz dida
+```
+
+4. 计算 sha256
+```bash
+shasum -a 256 dist/dida_darwin_arm64.tar.gz
+shasum -a 256 dist/dida_darwin_amd64.tar.gz
+```
+
+5. 在 `dida365-cli` 创建 GitHub Release（tag=`v0.1.0`）  
+- 上传上面两个 tar.gz
+
+6. 更新 `homebrew-tap/Formula/dida.rb`  
+- 把 `url` 改成 release 附件 URL
+- 把 `sha256` 改成对应值
+- 提交到 tap 仓库
+
+7. 本地验证安装
+```bash
+brew tap <your-org>/homebrew-tap
 brew install dida
+dida --help
 ```
 
-## 3. Formula 示例（darwin arm64）
+## 4. CI 自动构建流程（推荐）
 
-```ruby
-class Dida < Formula
-  desc "Dida365 CLI"
-  homepage "https://github.com/<your-org>/dida365-cli"
-  url "https://github.com/<your-org>/dida365-cli/releases/download/v0.1.0/dida_darwin_arm64.tar.gz"
-  sha256 "<fill-sha256>"
-  version "0.1.0"
+推荐技术栈：
+- GitHub Actions
+- GoReleaser
 
-  def install
-    bin.install "dida"
-  end
+最小流程：
+1. push tag（如 `v0.1.1`）
+2. GitHub Actions 触发
+3. GoReleaser 构建和打包
+4. 自动创建 GitHub Release 并上传产物
+5. 自动更新 `homebrew-tap` 的 formula 并提交
 
-  test do
-    assert_match "Dida365 CLI", shell_output("#{bin}/dida --help")
-  end
-end
+### 4.1 你需要的凭证
+
+1. `GITHUB_TOKEN`（Actions 自带）
+- 用于当前仓库 release 发布
+
+2. `HOMEBREW_TAP_TOKEN`（你创建的 PAT）
+- 用于写入另一个 tap 仓库
+- 需要对 tap 仓库有写权限
+
+### 4.2 `.goreleaser.yaml`（核心示例）
+
+```yaml
+project_name: dida
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - id: dida
+    main: ./cmd/dida
+    binary: dida
+    goos: [darwin, linux]
+    goarch: [amd64, arm64]
+
+archives:
+  - id: default
+    builds: [dida]
+    name_template: "dida_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format: tar.gz
+
+brews:
+  - name: dida
+    repository:
+      owner: <your-org>
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    folder: Formula
+    homepage: "https://github.com/<your-org>/dida365-cli"
+    description: "Dida365 CLI"
+    test: |
+      system "#{bin}/dida", "--help"
+
+release:
+  github:
+    owner: <your-org>
+    name: dida365-cli
 ```
 
-## 4. 当前仓库还缺什么
+### 4.3 GitHub Actions 工作流示例
 
-- 缺 `LICENSE`（本轮已补）
-- 缺正式版本 tag 与 release 产物
-- 缺 tap 仓库和 formula
-- 缺自动化发布流水线（可后续补 GitHub Actions）
+文件：`.github/workflows/release.yml`
 
-## 5. 建议执行顺序
+```yaml
+name: release
 
-1. 先发 `v0.1.0` 手工 release（验证流程）
-2. 再补 CI 自动构建与自动更新 formula
-3. 稳定后再考虑 Scoop / apt / npm 等多渠道分发
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - uses: goreleaser/goreleaser-action@v6
+        with:
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+```
+
+## 5. 建议推进顺序
+
+1. 先手工发一个版本（`v0.1.0`）验证链路  
+2. 再接入 GoReleaser + GitHub Actions  
+3. 稳定后再扩展更多分发渠道（如 Scoop）

@@ -79,4 +79,4 @@ JSON 示例（草案）：
 ```
 
 ## Decision (你只填这一行)
-Decision: A|B|C
+Decision: 放弃，先不实现了

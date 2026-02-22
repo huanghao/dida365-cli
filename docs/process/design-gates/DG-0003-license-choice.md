@@ -26,4 +26,4 @@
   - 在 `TODO.md` 标记 T-009 DONE 并记录 commit
 
 ## Decision (你只填这一行)
-Decision: A|B|C
+Decision: A

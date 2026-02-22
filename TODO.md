@@ -151,3 +151,10 @@ DONE
   - 新增 `docs/guides/agent-project-onboarding.md`
   - 明确新 agent 进入项目后的最小必读文件、执行规则与常用命令
 - commit：`a648f91`
+
+### 实现due date
+- 创建任务的时候支持截止时间
+- 支持更新一个任务的due date
+
+### 实现重复任务
+- 检查OPEN API是否支持创建重复任务，比如每周一早上8点之类的。如果支持，就做一下接口设计，然后支持它
