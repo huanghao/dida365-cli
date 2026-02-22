@@ -10,6 +10,7 @@ import (
 func NewShowCommand(app *App) *cobra.Command {
 	var projectID string
 	var taskID string
+	var format string
 	var asJSON bool
 
 	cmd := &cobra.Command{
@@ -23,6 +24,10 @@ func NewShowCommand(app *App) *cobra.Command {
 			if err != nil {
 				return err
 			}
+			resolvedFormat, err := resolveOutputFormat(format, asJSON)
+			if err != nil {
+				return err
+			}
 			if app.DryRun {
 				fmt.Fprintf(app.Out, "Would call GET %s/project/%s/task/%s\n", cfg.APIBaseURL, projectID, taskID)
 				return nil
@@ -32,7 +37,7 @@ func NewShowCommand(app *App) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			if asJSON {
+			if resolvedFormat == outputFormatJSON {
 				return output.PrintJSON(app.Out, task)
 			}
 			rows := [][]string{
@@ -50,6 +55,7 @@ func NewShowCommand(app *App) *cobra.Command {
 
 	cmd.Flags().StringVar(&projectID, "project", "", "Project ID")
 	cmd.Flags().StringVar(&taskID, "id", "", "Task ID")
+	cmd.Flags().StringVar(&format, "format", "", "Output format: table, json")
 	cmd.Flags().BoolVar(&asJSON, "json", false, "Output JSON")
 	return cmd
 }

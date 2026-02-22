@@ -1,0 +1,56 @@
+# Changelog
+
+## 2026-02-22
+
+### 记录 #1 / commit `fbe1d2c`
+- 本次进展结果：
+  - 完成阶段 A 调研产出：
+    - `docs/research/things-agent-docs.md`
+    - `docs/research/things-auth.md`
+    - `docs/research/things-cli-capabilities.md`
+    - `docs/research/things-storage.md`
+    - `docs/research/dida-mvp-command-api-mapping.md`
+  - 初始化 Go 工程结构并接入 `cobra`。
+  - 实现 OAuth 基础命令与任务核心命令：`projects/list/show/add/update/done/delete`。
+- 下一次计划：
+  - 补充 README、构建脚本和版本命令。
+  - 补充 API client 基础单元测试。
+  - 同步计划执行状态。
+
+### 记录 #2 / commit `dfd66e2`
+- 本次进展结果：
+  - 补充 `README.md` 和 `Makefile`。
+  - 增加 `dida version` 命令。
+  - 补充 `internal/dida/client_test.go` 基础测试。
+  - 通过 `go test ./...` 与 `go build ./cmd/dida`。
+- 下一次计划：
+  - 补充 `internal/cli` 命令层测试与 API 错误分支测试（401/403/404/5xx）。
+  - 统一 `list/show` 输出参数风格（`--format` / `--json`）。
+  - 推进 token 刷新策略设计与实现。
+
+### 记录 #3 / in-progress
+- 本次进展结果：
+  - 按要求把进展日志迁移到 `CHANGELOG.md`，并停止继续改动 `PLAN.md`。
+  - `list` 与 `show` 命令统一输出参数：新增 `--format table|json`，保留 `--json` 兼容。
+  - 新增命令层单测：`internal/cli/output_format_test.go`。
+  - 新增 API 错误分支测试：`internal/dida/client_error_test.go`（401/404/非法 JSON）。
+  - 已通过验证：`go test ./...`、`go build ./cmd/dida`。
+- 下一次计划：
+  - 继续补充 `internal/cli` 命令行为测试（参数校验、dry-run 输出）。
+  - 设计并实现 token 刷新（先 `auth refresh` 手动命令，再评估自动刷新）。
+  - 增强文档中的认证故障排查与实际回调示例。
+
+### 记录 #4 / in-progress
+- 本次进展结果：
+  - 继续统一输出能力：`list/show` 支持 `--format table|json`，并保持 `--json` 兼容。
+  - 新增输出格式解析模块：`internal/cli/output_format.go`。
+  - 新增命令层测试：`internal/cli/output_format_test.go`。
+  - 新增 API 错误分支测试：`internal/dida/client_error_test.go`（401/404/响应解码异常）。
+  - 新增手动 token 刷新能力：`dida auth refresh`。
+  - 新增刷新流程测试：`internal/dida/client_refresh_test.go`。
+  - 更新 README 命令列表，包含 `auth refresh`。
+  - 已通过验证：`go test ./...`、`dida auth --help`。
+- 下一次计划：
+  - 增加 `internal/cli` 命令行为测试（参数必填校验、dry-run 输出断言）。
+  - 评估并实现自动 refresh 策略（401 自动尝试刷新并重试一次）。
+  - 补充认证排障文档（code 获取、redirect URI 不匹配、scope/授权失败案例）。

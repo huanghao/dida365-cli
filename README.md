@@ -49,7 +49,7 @@ go run ./cmd/dida auth status
 
 ## Commands
 
-- `dida auth init|login|token|status|logout`
+- `dida auth init|login|token|refresh|status|logout`
 - `dida projects list`
 - `dida list --project <project_id>`
 - `dida show --project <project_id> --id <task_id>`

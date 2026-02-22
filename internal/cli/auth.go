@@ -22,6 +22,7 @@ func NewAuthCommand(app *App) *cobra.Command {
 	cmd.AddCommand(newAuthInitCommand(app))
 	cmd.AddCommand(newAuthLoginCommand(app))
 	cmd.AddCommand(newAuthTokenCommand(app))
+	cmd.AddCommand(newAuthRefreshCommand(app))
 	cmd.AddCommand(newAuthStatusCommand(app))
 	cmd.AddCommand(newAuthLogoutCommand(app))
 
@@ -178,6 +179,68 @@ func newAuthStatusCommand(app *App) *cobra.Command {
 			return nil
 		},
 	}
+	return cmd
+}
+
+func newAuthRefreshCommand(app *App) *cobra.Command {
+	var refreshToken string
+	var scope string
+
+	cmd := &cobra.Command{
+		Use:   "refresh",
+		Short: "Refresh access token by refresh token",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			cfg, err := loadConfig(app)
+			if err != nil {
+				return err
+			}
+			if err := ensureOAuthConfig(cfg); err != nil {
+				return err
+			}
+			tokenToUse := strings.TrimSpace(refreshToken)
+			if tokenToUse == "" {
+				tokenToUse = strings.TrimSpace(cfg.Token.RefreshToken)
+			}
+			if tokenToUse == "" {
+				return fmt.Errorf("missing refresh token; pass --refresh-token or run 'dida auth token --code ...' first")
+			}
+			if app.DryRun {
+				fmt.Fprintln(app.Out, "Would refresh access token")
+				return nil
+			}
+
+			resp, err := dida.ExchangeRefreshToken(
+				cfg.OAuth.ClientID,
+				cfg.OAuth.ClientSecret,
+				tokenToUse,
+				scope,
+			)
+			if err != nil {
+				return err
+			}
+
+			nextRefreshToken := resp.RefreshToken
+			if strings.TrimSpace(nextRefreshToken) == "" {
+				nextRefreshToken = tokenToUse
+			}
+			_, err = app.ConfigStore.SetToken(config.Token{
+				AccessToken:  resp.AccessToken,
+				RefreshToken: nextRefreshToken,
+				TokenType:    resp.TokenType,
+				Scope:        resp.Scope,
+				ExpiresIn:    resp.ExpiresIn,
+			})
+			if err != nil {
+				return err
+			}
+
+			fmt.Fprintf(app.Out, "Token refreshed and saved to %s\n", app.ConfigStore.Path())
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVar(&refreshToken, "refresh-token", "", "Refresh token (default: from config)")
+	cmd.Flags().StringVar(&scope, "scope", "tasks:read tasks:write", "OAuth scope")
 	return cmd
 }
 

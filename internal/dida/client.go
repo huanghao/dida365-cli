@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-const oauthTokenURL = "https://dida365.com/oauth/token"
+var oauthTokenURL = "https://dida365.com/oauth/token"
 
 type Client struct {
 	BaseURL    string
@@ -161,6 +161,51 @@ func ExchangeAuthorizationCode(clientID, clientSecret, redirectURI, code, scope 
 	var tokenResp TokenResponse
 	if err := json.Unmarshal(body, &tokenResp); err != nil {
 		return nil, fmt.Errorf("decode token response: %w", err)
+	}
+	return &tokenResp, nil
+}
+
+func ExchangeRefreshToken(clientID, clientSecret, refreshToken, scope string) (*TokenResponse, error) {
+	if strings.TrimSpace(clientID) == "" || strings.TrimSpace(clientSecret) == "" {
+		return nil, fmt.Errorf("client credentials are required")
+	}
+	if strings.TrimSpace(refreshToken) == "" {
+		return nil, fmt.Errorf("refresh_token is required")
+	}
+	if strings.TrimSpace(scope) == "" {
+		scope = "tasks:read tasks:write"
+	}
+
+	data := url.Values{}
+	data.Set("grant_type", "refresh_token")
+	data.Set("refresh_token", refreshToken)
+	data.Set("scope", scope)
+
+	req, err := http.NewRequest(http.MethodPost, oauthTokenURL, strings.NewReader(data.Encode()))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Authorization", "Basic "+basicAuth(clientID, clientSecret))
+
+	httpClient := &http.Client{Timeout: 30 * time.Second}
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return nil, fmt.Errorf("refresh token failed: %s", summarizeHTTPError(resp.StatusCode, body))
+	}
+
+	var tokenResp TokenResponse
+	if err := json.Unmarshal(body, &tokenResp); err != nil {
+		return nil, fmt.Errorf("decode refresh response: %w", err)
 	}
 	return &tokenResp, nil
 }
