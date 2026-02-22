@@ -9,7 +9,6 @@
   - 在 `TODO.md` 标记 `DONE`
   - 写入完成时间
   - 写入 commit hash
-  - 更新 `CHANGELOG.md`
 
 ## 2. 执行状态机
 - `PENDING`：未开始
@@ -63,10 +62,10 @@
 - `docs/process/TASK-BOARD.md`：任务状态流转
 - `docs/process/design-gates/*.md`：设计决策与确认记录
 - `docs/process/HANDOFF.md`：跨会话交接
-- `CHANGELOG.md`：完成结果与提交记录
+- `CHANGELOG.md`：版本发布说明（release notes）
 
 ## 7. 快速执行规则（给 agent）
 1. 读取 `TODO.md` 和 `TASK-BOARD.md`
 2. 执行第一个未完成任务
 3. 只在“必须停下”条件下发起设计闸门
-4. 完成后更新 `TODO.md`、`CHANGELOG.md`、`HANDOFF.md`
+4. 完成后更新 `TODO.md`、`HANDOFF.md`

@@ -26,7 +26,6 @@
 - 不改动未确认的设计闸门结论
 - 完成任务后必须同步：
   - `TODO.md`
-  - `CHANGELOG.md`
   - `docs/process/TASK-BOARD.md`
   - `docs/process/HANDOFF.md`
 - 若发现跨命令高影响设计项：新建 DG 并阻塞任务
