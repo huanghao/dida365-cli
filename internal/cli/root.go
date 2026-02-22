@@ -35,6 +35,7 @@ func NewRoot(app *App) *cobra.Command {
 	cmd.AddCommand(NewUpdateCommand(app))
 	cmd.AddCommand(NewDoneCommand(app))
 	cmd.AddCommand(NewDeleteCommand(app))
+	cmd.AddCommand(NewVersionCommand(app))
 
 	return cmd
 }
