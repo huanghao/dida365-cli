@@ -131,7 +131,7 @@ DONE
   - 根据 `DG-0003 Decision: A` 落地 MIT license
   - 新增 `LICENSE`
   - `README.md` 增加 License 段落
-- commit：待本次提交后回填
+- commit：`a648f91`
 
 ### 打包和发布
 - 命令行是不是用Homebrew来发布最好。我应该要先看什么准备信息？
@@ -141,7 +141,7 @@ DONE
 - 完成内容：
   - 新增发布指南：`docs/guides/release-homebrew.md`
   - 覆盖 Homebrew 发布准备清单、最小步骤、formula 示例、当前缺口与建议顺序
-- commit：待本次提交后回填
+- commit：`a648f91`
 
 ### 面向agent来阅读这个项目，会需要考虑增加什么文件和导引？
 
@@ -150,4 +150,4 @@ DONE
 - 完成内容：
   - 新增 `docs/guides/agent-project-onboarding.md`
   - 明确新 agent 进入项目后的最小必读文件、执行规则与常用命令
-- commit：待本次提交后回填
+- commit：`a648f91`
