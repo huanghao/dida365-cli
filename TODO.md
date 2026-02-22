@@ -22,5 +22,4 @@ DONE
   - 新建命令规范文档：`doc/man/dida.1.md`
   - 文档覆盖全局参数、auth 子命令、任务命令、示例与配置路径
   - 已体现当前实装状态：`auth init/login/token/status` 可直接使用（你已实操验证）
-- commit：待本次提交后回填
-
+- commit：`c7e230c`

@@ -78,7 +78,7 @@
   - 补充命令行为测试（含默认配置路径断言）。
   - 继续推进自动化 login（本地回调监听）设计。
 
-### 记录 #7 / in-progress
+### 记录 #7 / commit `c7e230c`
 - 本次进展结果：
   - 完成 TODO 文档任务：建立 `doc/man` 层并新增 `doc/man/dida.1.md`。
   - `dida.1.md` 已覆盖当前命令规范（全局参数、auth、projects、任务命令、示例）。
