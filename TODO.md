@@ -61,7 +61,7 @@ DONE
   - `list/show` 表格输出将 `status` 改为枚举标签（如 `incomplete/completed`）而非裸数字
   - `list/show` 表格输出将 `priority` 改为枚举标签（如 `none/low/medium/high`）而非裸数字
   - 新增展示层映射与测试：`internal/cli/task_view.go`, `internal/cli/task_view_test.go`
-- commit：待本次提交后回填
+- commit：`ebabd94`
 
 ### 实现token refresh
 - API文档上说grant_type目前只支持授权，但OAuth标准是支持fresh的。也许只需要验证一下当前的实现是否已经有效了。
