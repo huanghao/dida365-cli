@@ -45,6 +45,7 @@ Current history follows Conventional Commit-style prefixes:
 
 Use short imperative subjects and keep each commit scoped to one logical change.  
 Commit author attribution rule for this repo: include `Codex` in commit authorship (for example, commit with `--author=\"Codex <codex@openai.com>\"` or add a `Co-authored-by: Codex <codex@openai.com>` trailer).
+
 PRs should include:
 - clear summary of behavior changes,
 - linked issue or rationale,

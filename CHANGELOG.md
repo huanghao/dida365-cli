@@ -2,6 +2,21 @@
 
 ## 2026-02-22
 
+### 0. 当前进度（持续更新）
+- 更新时间：2026-02-22
+- 阶段状态：
+  - 阶段 A（调研与规格固化）：已完成
+  - 阶段 B（工程骨架搭建）：已完成
+  - 阶段 C（认证与 API 客户端）：进行中（核心链路已打通，测试待补强）
+  - 阶段 D（MVP 命令实现）：进行中（核心命令已实现，参数与交互待增强）
+  - 阶段 E（质量与发布准备）：进行中（README/Makefile/基础测试已补充）
+- 本次已完成：
+  - 完成 4 份 `things-cli` 调研文档与 1 份 `dida` MVP 映射文档
+  - 初始化 Go 工程（`cmd/` + `internal/`）并接入 `cobra`
+  - 实现 OAuth 相关命令：`auth init/login/token/status/logout`
+  - 实现核心任务命令：`projects list`、`list`、`show`、`add`、`update`、`done`、`delete`
+  - 补充 `README.md`、`Makefile`、`version` 命令与 `internal/dida` 基础单元测试
+
 ### 记录 #1 / commit `fbe1d2c`
 - 本次进展结果：
   - 完成阶段 A 调研产出：
