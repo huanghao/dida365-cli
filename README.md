@@ -5,6 +5,14 @@
 ## Requirements
 - Go >= 1.23 (tested with Go 1.24.x)
 - A Dida365 developer app (`client_id`, `client_secret`, `redirect_uri`)
+- This repo uses `goenv` to manage Go versions. Initialize `goenv` in your shell before running build/test commands:
+
+```bash
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+go version
+```
 
 ## Build
 
@@ -62,6 +70,7 @@ go run ./cmd/dida auth status
 
 Use `--dry-run` to preview requests without executing.
 For agent workflows, prefer `--json` on all actionable commands.
+Use `--no-cache` (or `DIDA_NO_CACHE=1`) to disable local read cache.
 
 `dida list` table output includes frequently-used fields by default:
 - completion state
@@ -77,10 +86,16 @@ Write debounce:
 - write commands (`add/update/done/delete/projects create`) are debounced for 3 seconds.
 - repeated identical write requests in the short window will be blocked to reduce accidental duplicate operations.
 
+Read cache:
+- read commands (`projects list`, `list`, `show`) use a local 10-second cache.
+- any successful write command clears read cache to reduce stale reads.
+
 ## Agent Docs
 
 - Quick manual: `docs/guides/agent-cli-quick-manual.md`
 - Maintenance rules: `docs/guides/agent-manual-rules.md`
+- Onboarding: `docs/guides/agent-project-onboarding.md`
+- Release: `docs/guides/release-homebrew.md`
 
 ## Collaboration Process
 
@@ -94,6 +109,7 @@ Write debounce:
 Default config path:
 
 - `~/.config/dida365-cli/config.json`
+- `~/.config/dida365-cli/cache.json` (read cache state)
 - `~/.config/dida365-cli/debounce.json` (write debounce state)
 - This project uses a fixed HOME-based default path on all platforms (does not use OS-specific `UserConfigDir`).
 
@@ -108,3 +124,7 @@ Override access token directly:
 ```bash
 DIDA_ACCESS_TOKEN=<token> dida projects list
 ```
+
+## License
+
+MIT. See `LICENSE`.

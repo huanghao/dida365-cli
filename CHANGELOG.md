@@ -231,3 +231,12 @@
 - 下一次计划：
   - 等待你确认 `Decision: A|B|C` 后落地 `LICENSE` 文件。
   - 并行推进 `T-010`（打包和发布准备）。
+
+### 记录 #22 / in-progress
+- 本次进展结果：
+  - 根据 `DG-0003 Decision: A` 落地 MIT：新增 `LICENSE`，并在 `README.md` 增加 License 说明。
+  - 完成 `T-010`：新增 `docs/guides/release-homebrew.md`（Homebrew 发布准备与最小流程）。
+  - 完成 `T-011`：新增 `docs/guides/agent-project-onboarding.md`（面向新 agent 的最小导引）。
+  - 补充 `DG-0002`：明确 stats 使用场景与可读指标清单，便于你做 A/B/C 决策。
+- 下一次计划：
+  - 等待你确认 `DG-0002` 的 `Decision: A|B|C`，继续完成 `T-008`。

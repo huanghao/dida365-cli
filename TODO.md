@@ -85,11 +85,14 @@ DONE
 DONE
 - 完成时间：2026-02-23 01:48:55 +0800
 - 完成内容：
-  - 按 `DG-0001 Decision: A` 落地：不做读缓存，只实现写操作防抖
+  - 按 `DG-0001 Decision: B` 落地：实现读缓存 + 写操作防抖
+  - 为 `projects list`、`list`、`show` 增加 10 秒本地读缓存（`~/.config/dida365-cli/cache.json`）
   - 为 `add/update/done/delete/projects create` 增加 3 秒短窗口防抖
   - 防抖状态持久化到 `~/.config/dida365-cli/debounce.json`
+  - 任意写操作成功后清空读缓存，避免读到陈旧数据
+  - 新增全局禁用开关：`--no-cache` / `DIDA_NO_CACHE=1`
   - 写入成功后记录签名，窗口内重复请求直接拦截，避免 agent 误重复写
-  - 新增测试：`internal/cli/write_debounce_test.go`
+  - 新增测试：`internal/cli/write_debounce_test.go`、`internal/cli/read_cache_test.go`
 - commit：`e0c4f09`
 
 ### 整理展示的字段和API的对应关系
@@ -117,11 +120,34 @@ DONE
 - commit：`c0ff3c7`
 
 ### 考虑其他适配agent的功能、限制、统计等功能
+- 设计闸门补充：已在 `DG-0002` 明确 stats 使用场景与指标草案，待你最终选择 A/B/C
 
 ### 项目增加license信息
 - 给我几个选项，应该用什么
 
+DONE
+- 完成时间：2026-02-23 02:03:28 +0800
+- 完成内容：
+  - 根据 `DG-0003 Decision: A` 落地 MIT license
+  - 新增 `LICENSE`
+  - `README.md` 增加 License 段落
+- commit：待本次提交后回填
+
 ### 打包和发布
 - 命令行是不是用Homebrew来发布最好。我应该要先看什么准备信息？
 
+DONE
+- 完成时间：2026-02-23 02:03:28 +0800
+- 完成内容：
+  - 新增发布指南：`docs/guides/release-homebrew.md`
+  - 覆盖 Homebrew 发布准备清单、最小步骤、formula 示例、当前缺口与建议顺序
+- commit：待本次提交后回填
+
 ### 面向agent来阅读这个项目，会需要考虑增加什么文件和导引？
+
+DONE
+- 完成时间：2026-02-23 02:03:28 +0800
+- 完成内容：
+  - 新增 `docs/guides/agent-project-onboarding.md`
+  - 明确新 agent 进入项目后的最小必读文件、执行规则与常用命令
+- commit：待本次提交后回填
