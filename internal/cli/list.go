@@ -45,13 +45,14 @@ func NewListCommand(app *App) *cobra.Command {
 				rows = append(rows, []string{
 					t.ID,
 					t.Title,
+					formatStatus(t.Status, t.CompletedTime),
 					completeLabel(t.Status, t.CompletedTime),
 					t.DueDate,
-					fmt.Sprintf("%d", t.Priority),
+					formatPriority(t.Priority),
 					content,
 				})
 			}
-			return output.PrintSimpleTable(app.Out, []string{"ID", "Title", "Completed", "Due", "Priority", "Content"}, rows)
+			return output.PrintSimpleTable(app.Out, []string{"ID", "Title", "Status", "Completed", "Due", "Priority", "Content"}, rows)
 		},
 	}
 

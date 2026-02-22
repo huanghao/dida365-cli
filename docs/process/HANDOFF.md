@@ -1,15 +1,15 @@
 # Handoff
 
 ## Current
-- Active Task: `T-003 展示字段的枚举值，而不是裸数字`
+- Active Task: `T-004 实现 token refresh（验证与设计）`
 - Status: `PENDING`
 - Branch: `main`
 
 ## Ready-To-Run Next Steps
-1. 为 `status` 与 `priority` 建立枚举映射（CLI 展示层）。
-2. 同步 `list/show` 表格输出与 JSON 输出（避免语义不一致）。
-3. 更新 `README.md` / `doc/man/dida.1.md`。
-4. 更新 `TODO.md` 与 `CHANGELOG.md`。
+1. 对照 Dida 官方文档复核 refresh token 是否官方支持。
+2. 用真实响应验证当前 `auth refresh` 行为是否可用。
+3. 若不可用，输出设计方案（是否降级为 re-auth 流程）。
+4. 更新 `docs/guides/dida-auth-token-flow.md`（记录 access token 过期时长观测值）。
 
 ## Blockers
 - 无

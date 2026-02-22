@@ -159,3 +159,13 @@
   - 复杂模板与附加字段改为 agent 维护责任。
 - 下一次计划：
   - 继续按 TODO 执行 `T-003`（展示字段枚举值）。
+
+### 记录 #14 / in-progress
+- 本次进展结果：
+  - 完成 `T-003`：展示字段改为枚举值而不是裸数字。
+  - `dida list` 增加 `Status` 枚举列，并将 `Priority` 改为枚举标签。
+  - `dida show` 将 `Status/Priority` 改为枚举标签输出。
+  - 新增映射逻辑与测试：`internal/cli/task_view.go`, `internal/cli/task_view_test.go`。
+  - 通过单元测试：`go test ./...`。
+- 下一次计划：
+  - 进入 `T-004`（token refresh 能力验证与设计）。

@@ -55,6 +55,14 @@ Content        这是内容
 Description
 ```
 
+DONE
+- 完成时间：2026-02-23 01:31:00 +0800
+- 完成内容：
+  - `list/show` 表格输出将 `status` 改为枚举标签（如 `incomplete/completed`）而非裸数字
+  - `list/show` 表格输出将 `priority` 改为枚举标签（如 `none/low/medium/high`）而非裸数字
+  - 新增展示层映射与测试：`internal/cli/task_view.go`, `internal/cli/task_view_test.go`
+- commit：待本次提交后回填
+
 ### 实现token refresh
 - API文档上说grant_type目前只支持授权，但OAuth标准是支持fresh的。也许只需要验证一下当前的实现是否已经有效了。
 - 如果无效，还要设计一下怎么才能实现。
@@ -75,7 +83,9 @@ Description
 ### 考虑其他适配agent的功能、限制、统计等功能
 
 ### 项目增加license信息
+- 给我几个选项，应该用什么
 
 ### 打包和发布
+- 命令行是不是用Homebrew来发布最好。我应该要先看什么准备信息？
 
 ### 面向agent来阅读这个项目，会需要考虑增加什么文件和导引？
