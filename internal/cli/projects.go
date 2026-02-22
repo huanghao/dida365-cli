@@ -38,9 +38,14 @@ func newProjectsListCommand(app *App) *cobra.Command {
 				return nil
 			}
 			client := newAPIClient(cfg)
-			projects, err := client.GetProjects()
-			if err != nil {
-				return err
+			cacheKey := readCacheKey("GET", "/project")
+			var projects []dida.Project
+			if !readCacheGet(app, cacheKey, &projects) {
+				projects, err = client.GetProjects()
+				if err != nil {
+					return err
+				}
+				readCachePut(app, cacheKey, projects)
 			}
 			if asJSON {
 				return output.PrintJSON(app.Out, projects)
@@ -99,6 +104,7 @@ func newProjectsCreateCommand(app *App) *cobra.Command {
 				return err
 			}
 			markWriteDebounce(app, "create_project", input)
+			clearReadCache(app)
 			if asJSON {
 				return output.PrintJSON(app.Out, project)
 			}

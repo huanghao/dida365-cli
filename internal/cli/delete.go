@@ -47,6 +47,7 @@ func NewDeleteCommand(app *App) *cobra.Command {
 				return err
 			}
 			markWriteDebounce(app, "delete_task", signature)
+			clearReadCache(app)
 			if asJSON {
 				return output.PrintJSON(app.Out, map[string]any{
 					"ok":      true,

@@ -17,6 +17,7 @@ Current implementation provides:
 - project list/create
 - task list/show/add/update/done/delete
 - token refresh command (best-effort; depends on server response capabilities)
+- read-command cache (10-second window for repeated GET requests)
 - write-command debounce (3-second window for duplicate write requests)
 
 ## GLOBAL OPTIONS
@@ -29,6 +30,9 @@ Current implementation provides:
 
 `--dry-run`
 : Print request intent without sending real API requests.
+
+`--no-cache`
+: Disable local read cache. Same as setting `DIDA_NO_CACHE=1`.
 
 `-h, --help`
 : Show help.

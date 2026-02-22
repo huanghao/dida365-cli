@@ -51,6 +51,7 @@ func NewAddCommand(app *App) *cobra.Command {
 				return err
 			}
 			markWriteDebounce(app, "add_task", input)
+			clearReadCache(app)
 			if asJSON {
 				return output.PrintJSON(app.Out, task)
 			}

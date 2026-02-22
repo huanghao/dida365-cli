@@ -24,18 +24,17 @@
 
 ## What Changes (agent 写)
 - 新增本地缓存文件：`~/.config/dida365-cli/cache.json`
-- 缓存键：`method + path + normalized_query + body_hash`
+- 缓存键：`method + path parts` 哈希
 - 缓存范围：仅 GET
-- TTL：默认 10 秒，可配置
+- TTL：默认 10 秒
 - 写操作防抖：
   - key = `command + normalized args`
   - 窗口默认 3 秒
-  - 命中时返回结构化提示（JSON 模式下可机器读）
 - 失效策略：
   - 任何写操作成功后，清理相关读缓存（简单策略：清空全部）
 
 ## Decision (你只填这一行)
-Decision: A
+Decision: B
 
 ## Implementation Status
-- 2026-02-23: 已按 A 落地（仅写操作防抖，不做读缓存）。
+- 2026-02-23: 已按 B 落地（读缓存 10 秒 + 写防抖 3 秒 + `--no-cache`/`DIDA_NO_CACHE=1`）。

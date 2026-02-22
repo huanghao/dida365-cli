@@ -25,6 +25,7 @@ func NewRoot(app *App) *cobra.Command {
 
 	cmd.PersistentFlags().BoolVar(&app.Debug, "debug", false, "Enable debug output")
 	cmd.PersistentFlags().BoolVar(&app.DryRun, "dry-run", false, "Print request intent without executing")
+	cmd.PersistentFlags().BoolVar(&app.NoCache, "no-cache", false, "Disable local read cache")
 	cmd.PersistentFlags().StringVar(&app.ConfigPath, "config", "", "Path to config file (default: ~/.config/dida365-cli/config.json)")
 
 	cmd.AddCommand(NewAuthCommand(app))

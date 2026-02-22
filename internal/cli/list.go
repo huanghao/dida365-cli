@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 
+	"github.com/huanghao/dida365-cli/internal/dida"
 	"github.com/huanghao/dida365-cli/internal/output"
 	"github.com/spf13/cobra"
 )
@@ -32,9 +33,15 @@ func NewListCommand(app *App) *cobra.Command {
 				return nil
 			}
 			client := newAPIClient(cfg)
-			data, err := client.GetProjectData(projectID)
-			if err != nil {
-				return err
+			cacheKey := readCacheKey("GET", "/project", projectID, "data")
+			var data dida.ProjectData
+			if !readCacheGet(app, cacheKey, &data) {
+				fresh, err := client.GetProjectData(projectID)
+				if err != nil {
+					return err
+				}
+				data = *fresh
+				readCachePut(app, cacheKey, data)
 			}
 			if resolvedFormat == outputFormatJSON {
 				return output.PrintJSON(app.Out, data)

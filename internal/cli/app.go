@@ -13,6 +13,7 @@ type App struct {
 	Err         io.Writer
 	Debug       bool
 	DryRun      bool
+	NoCache     bool
 	ConfigPath  string
 	ConfigStore *config.Store
 }

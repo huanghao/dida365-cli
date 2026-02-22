@@ -23,6 +23,14 @@ Use the Makefile targets for common workflows:
 
 Direct equivalents also work, e.g. `go test ./...` during iteration.
 
+Environment note (required for this repo):
+- Go is managed via `goenv`. Initialize `goenv` before running any `go`/`gofmt`/`make` command.
+- Recommended shell setup:
+  - `export GOENV_ROOT="$HOME/.goenv"`
+  - `export PATH="$GOENV_ROOT/bin:$PATH"`
+  - `eval "$(goenv init -)"`
+- Verify with `go version` and `gofmt -h`.
+
 ## Coding Style & Naming Conventions
 - Follow standard Go formatting and idioms; run `make fmt` before opening a PR.
 - Use tabs/`gofmt` defaults (do not hand-align spacing).
