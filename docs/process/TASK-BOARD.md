@@ -12,6 +12,6 @@
 | T-006 整理展示字段和 API 对应关系 | DONE | Codex | 2026-02-23 | 已补字段映射文档并增强 show 字段 |
 | T-007 限制创建 task 输入长度（<500） | DONE | Codex | 2026-02-23 | add 命令已加字符长度校验与测试 |
 | T-008 适配 agent 的功能/限制/统计 | BLOCKED_DESIGN | Codex | 2026-02-23 | 等待 DG-0002 决策 |
-| T-009 项目增加 license 信息 | PENDING | - | - | |
+| T-009 项目增加 license 信息 | BLOCKED_DESIGN | Codex | 2026-02-23 | 等待 DG-0003 许可证选择 |
 | T-010 打包和发布 | PENDING | - | - | |
 | T-011 面向 agent 的导引文件完善 | PENDING | - | - | |

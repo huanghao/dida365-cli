@@ -1,17 +1,19 @@
 # Handoff
 
 ## Current
-- Active Task: `T-009 项目增加 license 信息`
+- Active Task: `T-010 打包和发布`
 - Status: `PENDING`
 - Branch: `main`
 
 ## Ready-To-Run Next Steps
-1. 输出 license 选型文档（MIT/Apache-2.0/BSD-3-Clause）。
-2. 给出推荐与权衡，等待你确认选择。
-3. 确认后添加 LICENSE 文件并更新 README。
+1. 整理 Homebrew 发布准备清单（仓库结构、tag、formula、CI 产物）。
+2. 输出最小可执行发布流程文档。
+3. 明确你当前仓库还缺哪些前置条件。
 
 ## Blockers
 - T-008 阻塞：等待 `docs/process/design-gates/DG-0002-agent-adaptation-scope.md`
+  填写 `Decision: A|B|C`
+- T-009 阻塞：等待 `docs/process/design-gates/DG-0003-license-choice.md`
   填写 `Decision: A|B|C`
 
 ## If Blocked Later

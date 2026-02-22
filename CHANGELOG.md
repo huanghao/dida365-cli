@@ -222,3 +222,12 @@
 - 下一次计划：
   - 等待你确认 `Decision: A|B|C` 后恢复 `T-008`。
   - 并行推进 `T-009`（license 选型）。
+
+### 记录 #21 / blocked-design
+- 本次进展结果：
+  - 进入 `T-009`，输出许可证选型闸门：`DG-0003-license-choice.md`。
+  - 选项包含 MIT / Apache-2.0 / BSD-3-Clause，并给出推荐。
+  - 将 `T-009` 标记为 `BLOCKED_DESIGN`。
+- 下一次计划：
+  - 等待你确认 `Decision: A|B|C` 后落地 `LICENSE` 文件。
+  - 并行推进 `T-010`（打包和发布准备）。
