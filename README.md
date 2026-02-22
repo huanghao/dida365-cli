@@ -74,6 +74,13 @@ For agent workflows, prefer `--json` on all actionable commands.
 - Quick manual: `docs/guides/agent-cli-quick-manual.md`
 - Maintenance rules: `docs/guides/agent-manual-rules.md`
 
+## Collaboration Process
+
+- Workflow: `docs/process/COLLAB-WORKFLOW.md`
+- Task board: `docs/process/TASK-BOARD.md`
+- Handoff: `docs/process/HANDOFF.md`
+- Design gates: `docs/process/design-gates/README.md`
+
 ## Config
 
 Default config path:

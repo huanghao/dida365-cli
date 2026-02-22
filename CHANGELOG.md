@@ -141,3 +141,21 @@
 - 下一次计划：
   - 回填 TODO 任务 commit hash。
   - 继续推进“展示字段枚举值而不是裸数字”。
+
+### 记录 #12 / in-progress
+- 本次进展结果：
+  - 新建协作机制文档：`docs/process/COLLAB-WORKFLOW.md`。
+  - 新建任务看板：`docs/process/TASK-BOARD.md`。
+  - 新建交接文档：`docs/process/HANDOFF.md`。
+  - 新建设计闸门模板入口：`docs/process/design-gates/README.md`。
+  - README 增加协作机制入口。
+- 下一次计划：
+  - 按机制开始执行下一个任务 `T-003`。
+
+### 记录 #13 / in-progress
+- 本次进展结果：
+  - 设计闸门流程改为“极简确认模式”。
+  - 你只需在 DG 文档或对话里写：`Decision: A|B|C`。
+  - 复杂模板与附加字段改为 agent 维护责任。
+- 下一次计划：
+  - 继续按 TODO 执行 `T-003`（展示字段枚举值）。
