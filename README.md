@@ -62,6 +62,12 @@ go run ./cmd/dida auth status
 
 Use `--dry-run` to preview requests without executing.
 
+`dida list` table output includes frequently-used fields by default:
+- completion state
+- due date
+- priority
+- content (truncated preview)
+
 ## Config
 
 Default config path:

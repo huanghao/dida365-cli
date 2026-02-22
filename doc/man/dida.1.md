@@ -115,6 +115,8 @@ Optional flags:
 
 List tasks in a project.
 
+Default table columns include: ID, title, completed, due date, priority, content preview.
+
 Required flags:
 - `--project`
 
@@ -125,6 +127,8 @@ Optional flags:
 ## `dida show`
 
 Show one task detail in a project.
+
+Default table output includes: content, completed state, completed time, due date, priority.
 
 Required flags:
 - `--project`

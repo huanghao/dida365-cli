@@ -96,3 +96,13 @@
 - 下一次计划：
   - 补 CLI 命令级行为测试（create 参数校验与 dry-run）。
   - 继续完善认证流程与服务端能力边界说明。
+
+### 记录 #9 / in-progress
+- 本次进展结果：
+  - 根据 OpenAPI Task 字段增强 `list/show` 默认展示。
+  - `dida list` 现在默认展示：完成状态、due date、priority、content 预览。
+  - `dida show` 现在默认展示：content、completed、completedTime、due date、priority。
+  - 新增 `internal/cli/task_view.go` 与对应测试 `task_view_test.go`。
+- 下一次计划：
+  - 继续补命令级测试（`list/show` 输出与参数行为）。
+  - 基于真实 API 响应进一步校准状态字段语义。

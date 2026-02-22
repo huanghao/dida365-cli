@@ -41,9 +41,17 @@ func NewListCommand(app *App) *cobra.Command {
 			}
 			rows := make([][]string, 0, len(data.Tasks))
 			for _, t := range data.Tasks {
-				rows = append(rows, []string{t.ID, t.Title, fmt.Sprintf("%d", t.Status), t.DueDate})
+				content := ellipsis(t.Content, 40)
+				rows = append(rows, []string{
+					t.ID,
+					t.Title,
+					completeLabel(t.Status, t.CompletedTime),
+					t.DueDate,
+					fmt.Sprintf("%d", t.Priority),
+					content,
+				})
 			}
-			return output.PrintSimpleTable(app.Out, []string{"ID", "Title", "Status", "Due"}, rows)
+			return output.PrintSimpleTable(app.Out, []string{"ID", "Title", "Completed", "Due", "Priority", "Content"}, rows)
 		},
 	}
 

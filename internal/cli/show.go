@@ -45,9 +45,13 @@ func NewShowCommand(app *App) *cobra.Command {
 				{"Project", task.ProjectID},
 				{"Title", task.Title},
 				{"Status", fmt.Sprintf("%d", task.Status)},
+				{"Completed", completeLabel(task.Status, task.CompletedTime)},
+				{"CompletedTime", task.CompletedTime},
 				{"Start", task.StartDate},
 				{"Due", task.DueDate},
 				{"Priority", fmt.Sprintf("%d", task.Priority)},
+				{"Content", task.Content},
+				{"Description", task.Desc},
 			}
 			return output.PrintSimpleTable(app.Out, []string{"Field", "Value"}, rows)
 		},
