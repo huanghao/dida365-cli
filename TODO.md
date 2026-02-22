@@ -97,6 +97,15 @@ DONE
 ### 限制创建task时输入的内容长度（<500字）
 - 限制创建时输入的长度，但不限制展示的长度。因为我还可以通过其他App在界面去修改，而不仅仅是这个工具
 
+DONE
+- 完成时间：2026-02-23 01:45:47 +0800
+- 完成内容：
+  - `dida add` 增加输入长度校验：`--title`、`--content`、`--desc` 必须 `< 500` 字符
+  - 长度按字符数（rune）计算，支持中文
+  - 新增测试：`internal/cli/task_input_test.go`（499/500 边界）
+  - 更新文档：`README.md`、`doc/man/dida.1.md`、`docs/guides/agent-cli-quick-manual.md`
+- commit：待本次提交后回填
+
 ### 考虑其他适配agent的功能、限制、统计等功能
 
 ### 项目增加license信息

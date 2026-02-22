@@ -28,6 +28,9 @@ func NewAddCommand(app *App) *cobra.Command {
 			if strings.TrimSpace(projectID) == "" || strings.TrimSpace(title) == "" {
 				return fmt.Errorf("--project and --title are required")
 			}
+			if err := validateCreateTaskInput(title, content, desc); err != nil {
+				return err
+			}
 
 			input := buildTaskFromFlags(projectID, title, content, desc, startDate, dueDate, repeatFlag, timeZone, allDay, priority)
 			cfg, err := loadConfig(app)

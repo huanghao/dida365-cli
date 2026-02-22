@@ -69,6 +69,10 @@ For agent workflows, prefer `--json` on all actionable commands.
 - priority
 - content (truncated preview)
 
+Create input limit:
+- `dida add` enforces text length `< 500` characters for `--title`, `--content`, `--desc`.
+- This only limits CLI create input; existing longer task content can still be displayed.
+
 ## Agent Docs
 
 - Quick manual: `docs/guides/agent-cli-quick-manual.md`

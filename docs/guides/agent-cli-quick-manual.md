@@ -54,6 +54,9 @@ dida show --project <project_id> --id <task_id> --json
 dida add --project <project_id> --title "Task title" --content "Task content" --due "2026-02-25T18:00:00+0800" --priority 3 --json
 ```
 
+创建输入限制：
+- `--title`、`--content`、`--desc` 需 `< 500` 字符。
+
 更新任务：
 ```bash
 dida update --project <project_id> --id <task_id> --title "New title" --content "New content" --due "2026-02-26T18:00:00+0800" --priority 5 --json

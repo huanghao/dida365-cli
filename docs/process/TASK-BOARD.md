@@ -10,7 +10,7 @@
 | T-004 实现 token refresh（验证与设计） | DONE | Codex | 2026-02-23 | 已验证当前 app refresh 不可用，完成降级策略 |
 | T-005 实现缓存，减少抖动 | BLOCKED_DESIGN | Codex | 2026-02-23 | 等待 DG-0001 决策 |
 | T-006 整理展示字段和 API 对应关系 | DONE | Codex | 2026-02-23 | 已补字段映射文档并增强 show 字段 |
-| T-007 限制创建 task 输入长度（<500） | PENDING | - | - | |
+| T-007 限制创建 task 输入长度（<500） | DONE | Codex | 2026-02-23 | add 命令已加字符长度校验与测试 |
 | T-008 适配 agent 的功能/限制/统计 | PENDING | - | - | 可能涉及设计闸门 |
 | T-009 项目增加 license 信息 | PENDING | - | - | |
 | T-010 打包和发布 | PENDING | - | - | |

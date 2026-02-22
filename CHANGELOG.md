@@ -195,3 +195,12 @@
   - 明确结论：当前未发现可直接删除的无用 Task 字段。
 - 下一次计划：
   - 进入 `T-007`：限制创建/更新 task 输入内容长度（<500 字符）。
+
+### 记录 #18 / in-progress
+- 本次进展结果：
+  - 完成 `T-007`：限制创建任务输入长度（<500 字符）。
+  - `dida add` 增加 `title/content/desc` 字符长度校验（按 rune 计数，支持中文）。
+  - 新增测试：`internal/cli/task_input_test.go`（覆盖 499/500 边界）。
+  - 更新文档：`README.md`、`doc/man/dida.1.md`、`docs/guides/agent-cli-quick-manual.md`。
+- 下一次计划：
+  - 进入 `T-008`：整理并实现面向 agent 的功能/限制/统计能力。

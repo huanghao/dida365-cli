@@ -157,6 +157,10 @@ Optional flags:
 
 Create task.
 
+Input limits:
+- `--title`, `--content`, `--desc` must be `< 500` characters.
+- Limit applies to create input only, not display.
+
 Required flags:
 - `--project`
 - `--title`

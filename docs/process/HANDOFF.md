@@ -1,15 +1,15 @@
 # Handoff
 
 ## Current
-- Active Task: `T-007 限制创建 task 输入长度（<500字）`
+- Active Task: `T-008 适配 agent 的功能/限制/统计`
 - Status: `PENDING`
 - Branch: `main`
 
 ## Ready-To-Run Next Steps
-1. 在 `add/update` 输入校验阶段增加长度限制（<=500）。
-2. 为校验逻辑补单元测试（边界值：499/500/501）。
-3. 更新 README/man（明确限制仅作用于创建/更新输入）。
-4. 更新 TODO 与 CHANGELOG。
+1. 盘点 agent 需要的能力缺口（功能、限制、统计）。
+2. 先给出最小实现范围（例如 stats 子命令、错误码/约束输出规范）。
+3. 若涉及跨命令输出契约，创建设计闸门确认。
+4. 确认后实现并更新手册。
 
 ## Blockers
 - T-005 仍阻塞：DG-0001 需要你确认缓存/防抖方案
