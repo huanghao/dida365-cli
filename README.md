@@ -51,6 +51,7 @@ go run ./cmd/dida auth status
 
 - `dida auth init|login|token|refresh|status|logout`
 - `dida projects list`
+- `dida projects create --name "<project_name>" [flags]`
 - `dida list --project <project_id>`
 - `dida show --project <project_id> --id <task_id>`
 - `dida add --project <project_id> --title "..."`

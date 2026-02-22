@@ -14,7 +14,7 @@
 
 Current implementation provides:
 - OAuth setup/login/token exchange/status
-- project list
+- project list/create
 - task list/show/add/update/done/delete
 - token refresh command (best-effort; depends on server response capabilities)
 
@@ -95,6 +95,20 @@ Clear stored token in config.
 List projects from Dida API.
 
 Optional flags:
+- `--json`
+
+## `dida projects create`
+
+Create project in Dida API.
+
+Required flags:
+- `--name`
+
+Optional flags:
+- `--color`
+- `--sort-order`
+- `--view-mode` (`list|kanban|timeline`)
+- `--kind` (`TASK|NOTE`)
 - `--json`
 
 ## `dida list`
@@ -196,6 +210,9 @@ dida auth status
 
 # list projects
 dida projects list
+
+# create project
+dida projects create --name "Roadmap" --view-mode list --kind TASK
 
 # list tasks in project
 dida list --project <project_id>

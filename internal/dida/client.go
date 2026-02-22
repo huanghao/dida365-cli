@@ -33,8 +33,17 @@ type Project struct {
 	Name      string `json:"name"`
 	Kind      string `json:"kind,omitempty"`
 	Color     string `json:"color,omitempty"`
+	ViewMode  string `json:"viewMode,omitempty"`
 	Closed    bool   `json:"closed,omitempty"`
 	SortOrder int64  `json:"sortOrder,omitempty"`
+}
+
+type CreateProjectInput struct {
+	Name      string `json:"name"`
+	Color     string `json:"color,omitempty"`
+	SortOrder *int64 `json:"sortOrder,omitempty"`
+	ViewMode  string `json:"viewMode,omitempty"`
+	Kind      string `json:"kind,omitempty"`
 }
 
 type Task struct {
@@ -216,6 +225,14 @@ func (c *Client) GetProjects() ([]Project, error) {
 		return nil, err
 	}
 	return projects, nil
+}
+
+func (c *Client) CreateProject(input CreateProjectInput) (*Project, error) {
+	var project Project
+	if err := c.doJSON(http.MethodPost, "/project", input, &project); err != nil {
+		return nil, err
+	}
+	return &project, nil
 }
 
 func (c *Client) GetProjectData(projectID string) (*ProjectData, error) {

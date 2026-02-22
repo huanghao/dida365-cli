@@ -9,6 +9,7 @@
 - `dida auth login`
 - `dida auth status`
 - `dida projects list`
+- `dida projects create --name <name> [--view-mode list|kanban|timeline] [--kind TASK|NOTE]`
 - `dida list`（按项目聚合查看任务）
 - `dida show --project <id> --id <task_id>`
 - `dida add --project <id> --title <text> [...options]`
@@ -22,6 +23,7 @@
 |---|---|---|---|
 | `auth login` | `/oauth/authorize` + `/oauth/token` | Redirect + POST | OAuth2 授权码换 token |
 | `projects list` | `/open/v1/project` | GET | 列出项目 |
+| `projects create` | `/open/v1/project` | POST | 创建项目 |
 | `list --project` | `/open/v1/project/{projectId}/data` | GET | 取项目全量数据（含 tasks/columns） |
 | `show --project --id` | `/open/v1/project/{projectId}/task/{taskId}` | GET | 取单任务详情 |
 | `add` | `/open/v1/task` | POST | 创建任务 |

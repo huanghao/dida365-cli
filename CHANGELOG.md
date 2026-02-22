@@ -86,3 +86,13 @@
 - 下一次计划：
   - 回填 TODO 任务中的 commit hash。
   - 继续完善认证文档（刷新能力的文档表述与服务端能力边界）。
+
+### 记录 #8 / in-progress
+- 本次进展结果：
+  - 参考 Dida OpenAPI（`POST /open/v1/project`）实现 `dida projects create`。
+  - 新增项目创建参数：`--name`(required), `--color`, `--sort-order`, `--view-mode`, `--kind`, `--json`。
+  - API client 新增 `CreateProject`，并补充对应单元测试。
+  - 同步更新 README、man 文档与 MVP 映射文档。
+- 下一次计划：
+  - 补 CLI 命令级行为测试（create 参数校验与 dry-run）。
+  - 继续完善认证流程与服务端能力边界说明。

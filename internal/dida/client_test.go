@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -44,5 +45,45 @@ func TestCreateTaskMissingToken(t *testing.T) {
 	_, err := c.CreateTask(Task{ProjectID: "p1", Title: "t1"})
 	if err == nil {
 		t.Fatalf("expected error for missing token")
+	}
+}
+
+func TestCreateProject(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+		if r.URL.Path != "/project" {
+			t.Fatalf("unexpected path: %s", r.URL.Path)
+		}
+		var payload map[string]any
+		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
+			t.Fatalf("decode request body: %v", err)
+		}
+		if strings.TrimSpace(payload["name"].(string)) != "Demo Project" {
+			t.Fatalf("unexpected name: %+v", payload)
+		}
+		_ = json.NewEncoder(w).Encode(Project{
+			ID:       "p123",
+			Name:     "Demo Project",
+			Kind:     "TASK",
+			ViewMode: "list",
+			Color:    "#F18181",
+		})
+	}))
+	defer ts.Close()
+
+	c := NewClient(ts.URL, "token123")
+	project, err := c.CreateProject(CreateProjectInput{
+		Name:     "Demo Project",
+		ViewMode: "list",
+		Kind:     "TASK",
+		Color:    "#F18181",
+	})
+	if err != nil {
+		t.Fatalf("CreateProject returned error: %v", err)
+	}
+	if project.ID != "p123" || project.Name != "Demo Project" {
+		t.Fatalf("unexpected response: %+v", project)
 	}
 }
