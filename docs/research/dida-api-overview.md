@@ -86,6 +86,12 @@ Dida OpenAPI 使用 OAuth2 授权码流程。
   - refresh token 失效 -> 重新走授权码流程
   - scope 变化 -> 重新授权
 
+实现备注（本仓库验证）：
+- 在当前 app 配置下，`grant_type=refresh_token` 返回：
+  - `401`
+  - `Unauthorized grant type: refresh_token`
+- 因此实际生产策略应准备“重新授权”兜底路径。
+
 ## 3. 核心业务概念
 
 ## 3.1 项目（Project）

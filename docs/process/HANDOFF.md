@@ -1,20 +1,19 @@
 # Handoff
 
 ## Current
-- Active Task: `T-004 实现 token refresh（验证与设计）`
-- Status: `PENDING`
+- Active Task: `T-005 实现缓存，减少抖动`
+- Status: `BLOCKED_DESIGN`
 - Branch: `main`
 
 ## Ready-To-Run Next Steps
-1. 对照 Dida 官方文档复核 refresh token 是否官方支持。
-2. 用真实响应验证当前 `auth refresh` 行为是否可用。
-3. 若不可用，输出设计方案（是否降级为 re-auth 流程）。
-4. 更新 `docs/guides/dida-auth-token-flow.md`（记录 access token 过期时长观测值）。
+1. 设计短期缓存策略（查询命令缓存、写命令防抖）。
+2. 明确缓存介质、TTL、失效策略与并发安全策略。
+3. 输出设计闸门文档（若涉及跨命令一致性与不可逆改动）。 
+4. 确认后实现并补测试。
 
 ## Blockers
-- 无
+- DG-0001 需要你确认缓存/防抖方案
 
 ## If Blocked Later
-- 创建 `docs/process/design-gates/DG-XXXX-<topic>.md`
-- 在 `TASK-BOARD.md` 将对应任务改为 `BLOCKED_DESIGN`
-- 在本文件写清恢复条件
+- 已阻塞：等待你在 `docs/process/design-gates/DG-0001-cache-and-debounce.md` 填写
+  `Decision: A|B|C`

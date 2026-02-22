@@ -7,8 +7,8 @@
 | T-001 实现文档目录结构，完成 dida.1.md | DONE | Codex | 2026-02-23 | 已完成，见 `TODO.md` |
 | T-002 所有命令实现 `--json` 输出 | DONE | Codex | 2026-02-23 | 已完成，见 `TODO.md` |
 | T-003 展示字段的枚举值，而不是裸数字 | DONE | Codex | 2026-02-23 | 枚举标签已落地（status/priority） |
-| T-004 实现 token refresh（验证与设计） | PENDING | - | - | 需要先验证服务端能力 |
-| T-005 实现缓存，减少抖动 | PENDING | - | - | 可能涉及设计闸门 |
+| T-004 实现 token refresh（验证与设计） | DONE | Codex | 2026-02-23 | 已验证当前 app refresh 不可用，完成降级策略 |
+| T-005 实现缓存，减少抖动 | BLOCKED_DESIGN | Codex | 2026-02-23 | 等待 DG-0001 决策 |
 | T-006 整理展示字段和 API 对应关系 | PENDING | - | - | |
 | T-007 限制创建 task 输入长度（<500） | PENDING | - | - | |
 | T-008 适配 agent 的功能/限制/统计 | PENDING | - | - | 可能涉及设计闸门 |

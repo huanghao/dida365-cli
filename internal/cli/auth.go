@@ -288,6 +288,9 @@ func newAuthRefreshCommand(app *App) *cobra.Command {
 				scope,
 			)
 			if err != nil {
+				if strings.Contains(err.Error(), "Unauthorized grant type: refresh_token") {
+					return fmt.Errorf("refresh_token is not supported by Dida OAuth for this app; re-authenticate with 'dida auth login' then 'dida auth token --code ...'")
+				}
 				return err
 			}
 

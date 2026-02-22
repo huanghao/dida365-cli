@@ -169,3 +169,20 @@
   - 通过单元测试：`go test ./...`。
 - 下一次计划：
   - 进入 `T-004`（token refresh 能力验证与设计）。
+
+### 记录 #15 / in-progress
+- 本次进展结果：
+  - 完成 `T-004`：验证 token refresh 能力并落地降级策略。
+  - 验证结果：当前 app 对 `grant_type=refresh_token` 返回 `Unauthorized grant type: refresh_token`。
+  - `auth refresh` 增加明确错误提示，指引重新授权流程。
+  - 文档补充验证结论与 access token 观测时长（约 180 天）。
+- 下一次计划：
+  - 进入 `T-005` 缓存与防抖设计（预计需要设计闸门确认）。
+
+### 记录 #16 / blocked-design
+- 本次进展结果：
+  - 进入 `T-005`，识别为高影响设计项（缓存与防抖影响多命令行为）。
+  - 创建设计闸门：`docs/process/design-gates/DG-0001-cache-and-debounce.md`。
+  - 更新看板与交接状态为 `BLOCKED_DESIGN`。
+- 下一次计划：
+  - 等待你确认 `Decision: A|B|C` 后继续实现。

@@ -144,6 +144,17 @@ curl -sS -X POST 'https://dida365.com/oauth/token' \
 
 把新返回的 `access_token`（和可能更新的 `refresh_token`）覆盖保存。
 
+当前仓库验证结论（2026-02-23）：
+- 对 `grant_type=refresh_token` 的探测请求返回：
+  - `401`
+  - `{"error":"invalid_client","error_description":"Unauthorized grant type: refresh_token"}`
+- 结论：当前 Dida OAuth 对该 app 不支持 refresh_token 流程（至少在当前配置/租户下如此）。
+- 因此建议默认续期策略：到期后重新执行 `auth login` + `auth token --code ...`。
+
+当前仓库观测到的 access token 时长：
+- `expires_in = 15551999`（约 180 天）
+- 仅作为观测值，不保证所有应用/账号一致。
+
 ## 5. 用本项目 dida CLI 走同一流程
 
 如果你希望不手工拼 curl，也可以：

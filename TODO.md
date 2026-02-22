@@ -68,6 +68,15 @@ DONE
 - 如果无效，还要设计一下怎么才能实现。
 - 检查一下目前每次获得的access token的默认过期时间有多长？（记录到文档里： `docs/guides/dida-auth-token-flow.md`）
 
+DONE
+- 完成时间：2026-02-23 01:44:30 +0800
+- 完成内容：
+  - 验证 refresh_token 路径：当前 app 返回 `Unauthorized grant type: refresh_token`，不可用
+  - CLI 增加明确降级提示：`auth refresh` 失败时引导重新授权（`auth login` + `auth token --code ...`）
+  - 文档补充验证结论与观测时长（`expires_in=15551999`，约 180 天）
+  - 更新文档：`docs/guides/dida-auth-token-flow.md`、`docs/research/dida-api-overview.md`
+- commit：待本次提交后回填
+
 ### 实现缓存，减少抖动
 - 比如短时间调用多次查看命令，不需要都调用API
 - 实现短时间缓存，先做设计，缓存到哪里，存多长时间
