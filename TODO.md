@@ -158,3 +158,26 @@ DONE
 
 ### 实现重复任务
 - 检查OPEN API是否支持创建重复任务，比如每周一早上8点之类的。如果支持，就做一下接口设计，然后支持它
+
+### 修改brew包名
+
+现在的包名就叫dida不太好，名字太容易冲突了。把包名改成huanghao/tap/dida365-cli比较好。
+命令名也改成dida365-cli.
+
+```
+✦ ❯ brew info dida
+==> huanghao/tap/dida ✔: stable 0.0.1
+Dida365 CLI
+https://github.com/huanghao/dida365-cli
+Installed
+/opt/homebrew/Cellar/dida/0.0.1 (4 files, 9.1MB) *
+  Built from source on 2026-02-23 at 02:38:31
+From: https://github.com/huanghao/homebrew-tap/blob/HEAD/Formula/dida.rb
+```
+
+参考这个
+https://github.com/Yakitrak/notesmd-cli
+
+> You will need to have Homebrew installed.
+> brew tap yakitrak/yakitrak
+> brew install yakitrak/yakitrak/notesmd-cli
