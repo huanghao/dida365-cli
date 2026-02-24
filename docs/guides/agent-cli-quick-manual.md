@@ -1,4 +1,4 @@
-# dida cli 高频使用手册
+# dida365-cli 高频使用手册
 
 适用场景：
 - 人已完成认证（`auth init/login/token/status`）
@@ -13,7 +13,7 @@
 ## 0. 前置检查
 
 ```bash
-dida auth status --json
+dida365-cli auth status --json
 ```
 
 确认：
@@ -25,22 +25,22 @@ dida auth status --json
 
 列项目（JSON）：
 ```bash
-dida projects list --json
+dida365-cli projects list --json
 ```
 
 创建项目：
 ```bash
-dida projects create --name "Roadmap" --view-mode list --kind TASK --json
+dida365-cli projects create --name "Roadmap" --view-mode list --kind TASK --json
 ```
 
 按项目列任务（JSON）：
 ```bash
-dida list --project <project_id> --json
+dida365-cli list --project <project_id> --json
 ```
 
 查任务详情（JSON）：
 ```bash
-dida show --project <project_id> --id <task_id> --json
+dida365-cli show --project <project_id> --id <task_id> --json
 ```
 
 关注字段：
@@ -53,7 +53,7 @@ dida show --project <project_id> --id <task_id> --json
 
 创建任务：
 ```bash
-dida add --project <project_id> --title "Task title" --content "Task content" --due "2026-02-25T18:00:00+0800" --priority 3 --json
+dida365-cli add --project <project_id> --title "Task title" --content "Task content" --due "2026-02-25T18:00:00+0800" --priority 3 --json
 ```
 
 创建输入限制：
@@ -61,15 +61,15 @@ dida add --project <project_id> --title "Task title" --content "Task content" --
 
 更新任务：
 ```bash
-dida update --project <project_id> --id <task_id> --title "New title" --content "New content" --due "2026-02-26T18:00:00+0800" --priority 5 --json
+dida365-cli update --project <project_id> --id <task_id> --title "New title" --content "New content" --due "2026-02-26T18:00:00+0800" --priority 5 --json
 ```
 
 完成任务：
 ```bash
-dida done --project <project_id> --id <task_id> --json
+dida365-cli done --project <project_id> --id <task_id> --json
 ```
 
 删除任务：
 ```bash
-dida delete --project <project_id> --id <task_id> --json
+dida365-cli delete --project <project_id> --id <task_id> --json
 ```

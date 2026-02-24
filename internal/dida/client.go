@@ -285,7 +285,7 @@ func (c *Client) doJSON(method, path string, requestBody any, out any) error {
 		return fmt.Errorf("client is nil")
 	}
 	if strings.TrimSpace(c.Token) == "" {
-		return fmt.Errorf("missing access token; run 'dida auth status' and 'dida auth token --code ...'")
+		return fmt.Errorf("missing access token; run 'dida365-cli auth status' and 'dida365-cli auth token --code ...'")
 	}
 
 	var body io.Reader

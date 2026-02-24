@@ -1,4 +1,4 @@
-BINARY := dida
+BINARY := dida365-cli
 CMD := ./cmd/dida
 
 .PHONY: build run test tidy fmt

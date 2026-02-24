@@ -17,7 +17,7 @@ go version
 ## Build
 
 ```bash
-go build -o dida ./cmd/dida
+go build -o dida365-cli ./cmd/dida
 ```
 
 ## Run
@@ -57,29 +57,29 @@ go run ./cmd/dida auth status
 
 ## Commands
 
-- `dida auth init|login|token|refresh|status|logout`
-- `dida projects list`
-- `dida projects create --name "<project_name>" [flags]`
-- `dida list --project <project_id>`
-- `dida show --project <project_id> --id <task_id>`
-- `dida add --project <project_id> --title "..."`
-- `dida update --project <project_id> --id <task_id> [flags]`
-- `dida done --project <project_id> --id <task_id> [--json]`
-- `dida delete --project <project_id> --id <task_id> [--json]`
-- `dida version [--json]`
+- `dida365-cli auth init|login|token|refresh|status|logout`
+- `dida365-cli projects list`
+- `dida365-cli projects create --name "<project_name>" [flags]`
+- `dida365-cli list --project <project_id>`
+- `dida365-cli show --project <project_id> --id <task_id>`
+- `dida365-cli add --project <project_id> --title "..."`
+- `dida365-cli update --project <project_id> --id <task_id> [flags]`
+- `dida365-cli done --project <project_id> --id <task_id> [--json]`
+- `dida365-cli delete --project <project_id> --id <task_id> [--json]`
+- `dida365-cli version [--json]`
 
 Use `--dry-run` to preview requests without executing.
 For agent workflows, prefer `--json` on all actionable commands.
 Use `--no-cache` (or `DIDA_NO_CACHE=1`) to disable local read cache.
 
-`dida list` table output includes frequently-used fields by default:
+`dida365-cli list` table output includes frequently-used fields by default:
 - completion state
 - due date
 - priority
 - content (truncated preview)
 
 Create input limit:
-- `dida add` enforces text length `< 500` characters for `--title`, `--content`, `--desc`.
+- `dida365-cli add` enforces text length `< 500` characters for `--title`, `--content`, `--desc`.
 - This only limits CLI create input; existing longer task content can still be displayed.
 
 Write debounce:
@@ -116,13 +116,13 @@ Default config path:
 Override config path:
 
 ```bash
-dida --config /path/to/config.json auth status
+dida365-cli --config /path/to/config.json auth status
 ```
 
 Override access token directly:
 
 ```bash
-DIDA_ACCESS_TOKEN=<token> dida projects list
+DIDA_ACCESS_TOKEN=<token> dida365-cli projects list
 ```
 
 ## License

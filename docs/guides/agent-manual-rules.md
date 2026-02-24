@@ -14,7 +14,7 @@
 ## 2. 内容边界（必须）
 
 必须包含：
-- 前置检查（`dida auth status`）
+- 前置检查（`dida365-cli auth status`）
 - 高频命令：
   - `projects list`
   - `projects create`
@@ -46,7 +46,7 @@
 ## 4. 更新流程
 
 每次修改手册时，必须执行：
-1. 先运行命令帮助核对参数：`dida <cmd> --help`
+1. 先运行命令帮助核对参数：`dida365-cli <cmd> --help`
 2. 更新手册命令与说明
 3. 若命令行为变化明显，同步更新：
    - `README.md`

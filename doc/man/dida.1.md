@@ -1,16 +1,16 @@
-# dida 1 "Feb 2026" dida365-cli "User Manuals"
+# dida365-cli 1 "Feb 2026" dida365-cli "User Manuals"
 
 ## NAME
 
-`dida` - Dida365 command line interface
+`dida365-cli` - Dida365 command line interface
 
 ## SYNOPSIS
 
-`dida` [GLOBAL OPTIONS] _COMMAND_ [OPTIONS]
+`dida365-cli` [GLOBAL OPTIONS] _COMMAND_ [OPTIONS]
 
 ## DESCRIPTION
 
-`dida` is a Go CLI for Dida365 OpenAPI.
+`dida365-cli` is a Go CLI for Dida365 OpenAPI.
 
 Current implementation provides:
 - OAuth setup/login/token exchange/status
@@ -39,11 +39,11 @@ Current implementation provides:
 
 ## COMMANDS
 
-## `dida auth`
+## `dida365-cli auth`
 
 OAuth setup and token management.
 
-### `dida auth init`
+### `dida365-cli auth init`
 
 Save OAuth client settings.
 
@@ -55,7 +55,7 @@ Required flags:
 Optional flags:
 - `--json`
 
-### `dida auth login`
+### `dida365-cli auth login`
 
 Print authorization URL (user opens it in browser to authorize).
 
@@ -64,7 +64,7 @@ Optional flags:
 - `--state` (default: auto-generated)
 - `--json`
 
-### `dida auth token`
+### `dida365-cli auth token`
 
 Exchange authorization code for access token and save into config.
 
@@ -75,7 +75,7 @@ Optional flags:
 - `--scope`
 - `--json`
 
-### `dida auth status`
+### `dida365-cli auth status`
 
 Show current config/token status:
 - config path
@@ -87,7 +87,7 @@ Show current config/token status:
 Optional flags:
 - `--json`
 
-### `dida auth refresh`
+### `dida365-cli auth refresh`
 
 Try refreshing access token with refresh token.
 
@@ -98,23 +98,23 @@ Optional flags:
 
 Note:
 - If server response does not include a refresh token, this command may be unavailable in practice.
-- In that case, use `dida auth login` + `dida auth token --code ...` again.
+- In that case, use `dida365-cli auth login` + `dida365-cli auth token --code ...` again.
 
-### `dida auth logout`
+### `dida365-cli auth logout`
 
 Clear stored token in config.
 
 Optional flags:
 - `--json`
 
-## `dida projects list`
+## `dida365-cli projects list`
 
 List projects from Dida API.
 
 Optional flags:
 - `--json`
 
-## `dida projects create`
+## `dida365-cli projects create`
 
 Create project in Dida API.
 
@@ -128,7 +128,7 @@ Optional flags:
 - `--kind` (`TASK|NOTE`)
 - `--json`
 
-## `dida list`
+## `dida365-cli list`
 
 List tasks in a project.
 
@@ -141,7 +141,7 @@ Optional flags:
 - `--format table|json`
 - `--json` (alias style; compatible with `--format json`)
 
-## `dida show`
+## `dida365-cli show`
 
 Show one task detail in a project.
 
@@ -158,7 +158,7 @@ Optional flags:
 - `--format table|json`
 - `--json`
 
-## `dida add`
+## `dida365-cli add`
 
 Create task.
 
@@ -181,7 +181,7 @@ Optional flags:
 - `--all-day`
 - `--json`
 
-## `dida update`
+## `dida365-cli update`
 
 Update task.
 
@@ -204,7 +204,7 @@ Optional flags:
 - `--all-day`
 - `--json`
 
-## `dida done`
+## `dida365-cli done`
 
 Complete a task.
 
@@ -212,7 +212,7 @@ Required flags:
 - `--project`
 - `--id`
 
-## `dida delete`
+## `dida365-cli delete`
 
 Delete a task.
 
@@ -220,7 +220,7 @@ Required flags:
 - `--project`
 - `--id`
 
-## `dida version`
+## `dida365-cli version`
 
 Print CLI version.
 
@@ -231,34 +231,34 @@ Optional flags:
 
 ```bash
 # init oauth settings
-dida auth init --client-id <id> --client-secret <secret> --redirect-uri http://127.0.0.1:53682/callback
+dida365-cli auth init --client-id <id> --client-secret <secret> --redirect-uri http://127.0.0.1:53682/callback
 
 # print auth url
-dida auth login
+dida365-cli auth login
 
 # exchange code
-dida auth token --code <authorization_code>
+dida365-cli auth token --code <authorization_code>
 
 # check status
-dida auth status
+dida365-cli auth status
 
 # list projects
-dida projects list
+dida365-cli projects list
 
 # create project
-dida projects create --name "Roadmap" --view-mode list --kind TASK
+dida365-cli projects create --name "Roadmap" --view-mode list --kind TASK
 
 # list tasks in project
-dida list --project <project_id>
+dida365-cli list --project <project_id>
 
 # show task
-dida show --project <project_id> --id <task_id>
+dida365-cli show --project <project_id> --id <task_id>
 
 # create task
-dida add --project <project_id> --title "Buy milk"
+dida365-cli add --project <project_id> --title "Buy milk"
 
 # complete task
-dida done --project <project_id> --id <task_id>
+dida365-cli done --project <project_id> --id <task_id>
 ```
 
 ## FILES

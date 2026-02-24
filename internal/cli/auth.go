@@ -91,7 +91,7 @@ func newAuthLoginCommand(app *App) *cobra.Command {
 				return err
 			}
 			if strings.TrimSpace(cfg.OAuth.ClientID) == "" || strings.TrimSpace(cfg.OAuth.RedirectURI) == "" {
-				return fmt.Errorf("missing oauth client settings; run 'dida auth init ...'")
+				return fmt.Errorf("missing oauth client settings; run 'dida365-cli auth init ...'")
 			}
 			if strings.TrimSpace(scope) == "" {
 				scope = "tasks:read tasks:write"
@@ -107,13 +107,13 @@ func newAuthLoginCommand(app *App) *cobra.Command {
 				return output.PrintJSON(app.Out, map[string]any{
 					"action":            "auth_login",
 					"authorization_url": authURL,
-					"next_command":      "dida auth token --code <authorization_code>",
+					"next_command":      "dida365-cli auth token --code <authorization_code>",
 				})
 			}
 			fmt.Fprintln(app.Out, authURL)
 			fmt.Fprintln(app.Out)
 			fmt.Fprintln(app.Out, "Open the URL, authorize, then run:")
-			fmt.Fprintln(app.Out, "  dida auth token --code <authorization_code>")
+			fmt.Fprintln(app.Out, "  dida365-cli auth token --code <authorization_code>")
 			return nil
 		},
 	}
@@ -267,7 +267,7 @@ func newAuthRefreshCommand(app *App) *cobra.Command {
 				tokenToUse = strings.TrimSpace(cfg.Token.RefreshToken)
 			}
 			if tokenToUse == "" {
-				return fmt.Errorf("missing refresh token; pass --refresh-token or run 'dida auth token --code ...' first")
+				return fmt.Errorf("missing refresh token; pass --refresh-token or run 'dida365-cli auth token --code ...' first")
 			}
 			if app.DryRun {
 				if asJSON {
@@ -289,7 +289,7 @@ func newAuthRefreshCommand(app *App) *cobra.Command {
 			)
 			if err != nil {
 				if strings.Contains(err.Error(), "Unauthorized grant type: refresh_token") {
-					return fmt.Errorf("refresh_token is not supported by Dida OAuth for this app; re-authenticate with 'dida auth login' then 'dida auth token --code ...'")
+					return fmt.Errorf("refresh_token is not supported by Dida OAuth for this app; re-authenticate with 'dida365-cli auth login' then 'dida365-cli auth token --code ...'")
 				}
 				return err
 			}

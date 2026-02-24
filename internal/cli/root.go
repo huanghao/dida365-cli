@@ -8,7 +8,7 @@ import (
 
 func NewRoot(app *App) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:           "dida",
+		Use:           "dida365-cli",
 		Short:         "Dida365 CLI",
 		SilenceUsage:  true,
 		SilenceErrors: true,

@@ -45,13 +45,13 @@ func ensureOAuthConfig(cfg *config.Config) error {
 		return fmt.Errorf("config is nil")
 	}
 	if strings.TrimSpace(cfg.OAuth.ClientID) == "" {
-		return fmt.Errorf("missing oauth.client_id; run 'dida auth init --client-id ... --client-secret ... --redirect-uri ...'")
+		return fmt.Errorf("missing oauth.client_id; run 'dida365-cli auth init --client-id ... --client-secret ... --redirect-uri ...'")
 	}
 	if strings.TrimSpace(cfg.OAuth.ClientSecret) == "" {
-		return fmt.Errorf("missing oauth.client_secret; run 'dida auth init --client-id ... --client-secret ... --redirect-uri ...'")
+		return fmt.Errorf("missing oauth.client_secret; run 'dida365-cli auth init --client-id ... --client-secret ... --redirect-uri ...'")
 	}
 	if strings.TrimSpace(cfg.OAuth.RedirectURI) == "" {
-		return fmt.Errorf("missing oauth.redirect_uri; run 'dida auth init --client-id ... --client-secret ... --redirect-uri ...'")
+		return fmt.Errorf("missing oauth.redirect_uri; run 'dida365-cli auth init --client-id ... --client-secret ... --redirect-uri ...'")
 	}
 	return nil
 }
